@@ -6,7 +6,7 @@
 <title>PisunWallet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css">
 <style>
@@ -19,7 +19,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;}
-body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--text);display:flex;justify-content:center;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body{font-family:'Manrope',-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--text);display:flex;justify-content:center;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 .bg-wrap{position:fixed;inset:0;z-index:0;overflow:hidden;background:radial-gradient(900px 500px at 12% -10%,rgba(198,245,58,.06),transparent 60%),radial-gradient(700px 500px at 100% 0%,rgba(55,224,122,.04),transparent 55%),var(--bg);}
 .orb{display:none;}
 .orb.a{width:480px;height:480px;left:50%;top:4%;transform:translateX(-50%);background:radial-gradient(circle,#5560e6,#2f2f9e 60%,transparent 70%);}
@@ -33,16 +33,17 @@ body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:var(--bg)
 .grain{position:absolute;inset:0;opacity:.05;background-image:radial-gradient(rgba(255,255,255,.6) 1px,transparent 1px);background-size:3px 3px;pointer-events:none;}
 #app{position:relative;z-index:2;width:100%;max-width:480px;min-height:100vh;display:flex;flex-direction:column;background:rgba(7,9,8,.55);border-left:1px solid var(--line);border-right:1px solid var(--line);}
 .screen{flex:1;overflow-y:auto;padding:18px 16px 98px;}
-h1,h2,h3{font-family:'Inter',sans-serif;letter-spacing:-.3px;font-weight:700;}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-.3px;font-weight:700;}
 .muted{color:var(--muted);}
 .center{text-align:center;}
 i.fi{display:inline-flex;line-height:0;}
 .card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:12px 0;box-shadow:var(--shadow);animation:rise .5s ease both;}
-button{cursor:pointer;border:none;border-radius:12px;padding:14px 16px;font-family:inherit;font-size:15px;font-weight:700;color:#0a0d08;width:100%;transition:.15s;background:var(--lime);}
-button:hover{filter:brightness(1.06);}
+button{cursor:pointer;position:relative;overflow:hidden;border:1px solid rgba(198,245,58,.26);border-radius:16px;padding:15px 18px;font-family:inherit;font-size:15px;font-weight:600;letter-spacing:.1px;color:#f4ffda;width:100%;transition:transform .18s ease,box-shadow .25s ease,border-color .25s ease,background .25s ease;background:linear-gradient(180deg,rgba(198,245,58,.15),rgba(198,245,58,.06));backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 6px 20px rgba(0,0,0,.26);}
+button::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.13),transparent 42%);pointer-events:none;}
+button:hover{transform:translateY(-1px);border-color:rgba(198,245,58,.48);box-shadow:inset 0 1px 0 rgba(255,255,255,.26),0 10px 30px rgba(198,245,58,.14);}
 button:active{transform:scale(.98);}
 button:disabled{opacity:.55;cursor:not-allowed;}
-button.ghost{background:var(--card2);border:1px solid var(--line2);color:var(--text);} button.ghost:hover{border-color:var(--lime-line);filter:none;}
+button.ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:var(--text);backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.14);} button.ghost::before{display:none;} button.ghost:hover{border-color:var(--lime-line);filter:none;}
 button.danger{background:transparent;color:var(--err);border:1px solid rgba(248,113,113,.4);} button.danger:hover{background:rgba(248,113,113,.1);box-shadow:none;}
 .row{display:flex;gap:10px;} .row>*{flex:1;}
 input,textarea,select{width:100%;background:#0d1110;border:1px solid var(--line2);border-radius:11px;padding:13px;color:var(--text);font-family:inherit;font-size:15px;outline:none;resize:none;transition:.15s;}
@@ -52,7 +53,7 @@ label{display:block;margin:12px 0 6px;font-size:13px;color:var(--muted);}
 .brand{display:flex;align-items:center;gap:12px;justify-content:center;margin:30px 0 8px;}
 .brand .mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(160deg,#1a2018,#0c100e);border:1px solid var(--lime-line);display:grid;place-items:center;}
 .brand .mark svg{width:20px;height:20px;}
-.brand span{font-family:'Inter';font-size:20px;font-weight:700;letter-spacing:-.2px;}
+.brand span{font-family:'Space Grotesk';font-size:20px;font-weight:700;letter-spacing:-.2px;}
 .eyebrow{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:999px;border:1px solid var(--line);background:var(--panel);font-size:12px;font-weight:600;color:var(--muted);}
 .head{display:flex;align-items:center;justify-content:space-between;padding:2px;animation:rise .45s ease both;}
 .pill{font-size:12px;font-weight:600;padding:8px 13px;border-radius:999px;background:var(--panel);border:1px solid var(--line);color:var(--muted);text-transform:capitalize;}
@@ -62,14 +63,14 @@ label{display:block;margin:12px 0 6px;font-size:13px;color:var(--muted);}
 .balwrap{position:relative;text-align:center;padding:34px 0 14px;animation:rise .5s ease both;}
 .hero-glow{position:absolute;left:50%;top:30%;transform:translateX(-50%);width:360px;height:170px;background:radial-gradient(ellipse at center,rgba(198,245,58,.10),transparent 70%);filter:blur(22px);z-index:-1;}
 @keyframes pulse{0%,100%{opacity:.6;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.08)}}
-.balance{font-family:'Inter';font-size:46px;font-weight:800;line-height:1;letter-spacing:-.5px;color:#fff;font-variant-numeric:tabular-nums;}
-.balance small{font-family:'Inter';font-size:18px;font-weight:600;color:var(--muted);}
+.balance{font-family:'Space Grotesk';font-size:46px;font-weight:800;line-height:1;letter-spacing:-.5px;color:#fff;font-variant-numeric:tabular-nums;}
+.balance small{font-family:'Space Grotesk';font-size:18px;font-weight:600;color:var(--muted);}
 .balusd{color:var(--muted);font-size:15px;margin-top:8px;}
 .addr{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--muted);cursor:pointer;padding:8px 13px;border-radius:999px;border:1px solid var(--line);background:var(--panel);}
 .addr:hover{border-color:var(--lime-line);color:var(--lime);}
 .actions{display:flex;gap:12px;margin:16px 0 4px;animation:rise .55s ease both;}
 .actions button{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:11px;padding:16px 0;font-size:12.5px;font-weight:600;font-family:inherit;border-radius:14px;color:var(--text);background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);box-shadow:none;transition:transform .15s ease,border-color .15s;}
-.actions button::before{content:none;}
+.actions button::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.1),transparent 45%);pointer-events:none;}
 .actions button:hover{transform:translateY(-2px);border-color:var(--lime-line);}
 .actions button:active{transform:translateY(-1px) scale(.98);}
 .actions .ic{position:relative;overflow:hidden;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:19px;color:var(--lime);background:linear-gradient(160deg,#1a2018,#0c100e);border:1px solid var(--lime-line);box-shadow:none;}
@@ -108,7 +109,7 @@ label{display:block;margin:12px 0 6px;font-size:13px;color:var(--muted);}
 .nftm{padding:10px 12px;}
 .nftm .t{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .nftm .s{font-size:11.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.tabbar{position:sticky;bottom:0;z-index:20;display:flex;gap:4px;margin:0 12px calc(12px + env(safe-area-inset-bottom));padding:6px;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 14px 44px rgba(0,0,0,.55);}
+.tabbar{position:sticky;bottom:0;z-index:20;display:flex;gap:4px;margin:0 12px calc(12px + env(safe-area-inset-bottom));padding:6px;background:rgba(10,13,11,.55);backdrop-filter:blur(26px) saturate(150%);-webkit-backdrop-filter:blur(26px) saturate(150%);border:1px solid rgba(255,255,255,.10);border-radius:16px;box-shadow:0 14px 44px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.07);}
 .tabbar button{position:relative;flex:1;background:transparent;color:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-size:10.5px;font-weight:600;padding:9px 0;border-radius:10px;transition:background .2s,color .2s;}
 .tabbar button .ic{font-size:20px;transition:.25s;}
 .tabbar button:hover{background:var(--card2);box-shadow:none;transform:none;color:var(--text);}
@@ -117,9 +118,9 @@ label{display:block;margin:12px 0 6px;font-size:13px;color:var(--muted);}
 .seed{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0;}
 .seed div{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;}
 .seed .n{color:var(--muted);margin-right:6px;}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:98px;background:rgba(13,17,16,.97);border:1px solid var(--line2);padding:12px 18px;border-radius:11px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:90%;text-align:center;}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:98px;background:rgba(13,17,16,.7);backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--line2);padding:12px 18px;border-radius:11px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:90%;text-align:center;}
 .toast.show{opacity:1;}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;z-index:50;backdrop-filter:blur(4px);}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:50;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
 .modal .sheet{width:100%;max-width:480px;background:linear-gradient(180deg,#0e1311,#0a0e0c);border:1px solid var(--line2);border-radius:22px 22px 0 0;padding:20px 16px calc(22px + env(safe-area-inset-bottom));max-height:92vh;overflow-y:auto;animation:up .25s ease;}
 @keyframes up{from{transform:translateY(60px);opacity:.5}to{transform:none;opacity:1}}
 @keyframes rise{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
@@ -135,7 +136,7 @@ label{display:block;margin:12px 0 6px;font-size:13px;color:var(--muted);}
 .chead{display:flex;align-items:center;gap:13px;margin-bottom:6px;}
 .clogo{width:50px;height:50px;border-radius:50%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:1px solid var(--line);font-weight:600;}
 .clogo.ton{background:linear-gradient(160deg,#1a2018,#0c100e);border:1px solid var(--lime-line);} .clogo.ton svg{width:26px;height:26px;}
-.cprice{font-family:'Inter';font-size:34px;font-weight:800;letter-spacing:-.5px;margin-top:6px;font-variant-numeric:tabular-nums;}
+.cprice{font-family:'Space Grotesk';font-size:34px;font-weight:800;letter-spacing:-.5px;margin-top:6px;font-variant-numeric:tabular-nums;}
 .cdiff{font-size:14px;font-weight:600;margin-top:2px;color:var(--muted);}
 .cdiff.pos{color:var(--ok);} .cdiff.neg{color:var(--err);}
 .chart{margin:16px 0 6px;}
@@ -153,12 +154,14 @@ label{display:block;margin:12px 0 6px;font-size:13px;color:var(--muted);}
 .promo .psub{font-size:12.5px;opacity:.92;margin-top:4px;}
 .promo .pico{position:relative;z-index:1;width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:25px;background:rgba(255,255,255,.22);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.3);}
 /* v4: liquid glass + water ripple */
-#app{backdrop-filter:none;-webkit-backdrop-filter:none;}
-.card{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);backdrop-filter:none;-webkit-backdrop-filter:none;}
-.card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.05),transparent 30%);pointer-events:none;}
+#app{background:rgba(7,9,8,.5);backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);}
+.card{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(20,26,23,.6),rgba(13,17,16,.48));border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(24px) saturate(150%);-webkit-backdrop-filter:blur(24px) saturate(150%);box-shadow:0 24px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08);}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.10),transparent 32%);pointer-events:none;}
 @keyframes sheen{0%,100%{left:-45%}50%{left:135%}}
-.modal .sheet{backdrop-filter:none;-webkit-backdrop-filter:none;}
-.actions button,.icbtn,.pill,.addr,.tag,.mkt,.eyebrow,.tok:hover{backdrop-filter:none;-webkit-backdrop-filter:none;}
+.modal .sheet{background:linear-gradient(180deg,rgba(18,24,21,.85),rgba(10,14,12,.8));backdrop-filter:blur(30px) saturate(150%);-webkit-backdrop-filter:blur(30px) saturate(150%);}
+.actions button{background:linear-gradient(180deg,rgba(22,28,24,.5),rgba(13,17,16,.4));backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);box-shadow:inset 0 1px 0 rgba(255,255,255,.07);}
+.icbtn,.pill,.addr,.tag,.eyebrow{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);}
+.mkt{background:linear-gradient(180deg,rgba(22,28,24,.5),rgba(13,17,16,.4));backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);}
 .tok img,.tok .logo,.clogo{box-shadow:none;}
 .ripple{display:none;pointer-events:none;opacity:.07;mix-blend-mode:screen;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.011 0.018' numOctaves='2' seed='8'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:520px 520px;animation:drift 26s linear infinite;}
 @keyframes drift{0%{transform:translate(0,0) scale(1.25) rotate(0deg)}50%{transform:translate(-5%,4%) scale(1.4) rotate(8deg)}100%{transform:translate(0,0) scale(1.25) rotate(0deg)}}
@@ -180,7 +183,7 @@ label{display:block;margin:12px 0 6px;font-size:13px;color:var(--muted);}
 </div>
 
 <script type="module">
-import { mnemonicNew, mnemonicToWalletKey, mnemonicValidate } from "https://esm.sh/@ton/crypto@3.3.0";
+import { mnemonicNew, mnemonicToWalletKey, mnemonicValidate, keyPairFromSeed } from "https://esm.sh/@ton/crypto@3.3.0";
 import { TonClient, WalletContractV4, internal, toNano, fromNano, Address, beginCell } from "https://esm.sh/@ton/ton@15.1.0";
 
 const APP_NAME="PisunWallet";
@@ -202,7 +205,7 @@ const MARKETS=[
 ];
 const RANGES=[{k:"1d",t:"1Д",s:86400},{k:"7d",t:"7Д",s:604800},{k:"1m",t:"1М",s:2592000},{k:"1y",t:"1Г",s:31536000}];
 
-let S={mnemonic:null,key:null,wallet:null,client:null,address:null,raw:null,network:"mainnet",ton:0,tonUsd:0,jettons:[],events:[],pendingMnemonic:null,tab:"home",coinKey:null,coinId:"ton",coinRange:"7d"};
+let S={mnemonic:null,secret:null,seed:null,key:null,wallet:null,client:null,address:null,raw:null,network:"mainnet",ton:0,tonUsd:0,jettons:[],events:[],pendingMnemonic:null,pendingSecret:null,tab:"home",coinKey:null,coinId:"ton",coinRange:"7d"};
 let vanityStop=false;
 
 const $=(id)=>document.getElementById(id);
@@ -225,11 +228,13 @@ async function deriveKey(pw,salt){const bk=await crypto.subtle.importKey("raw",e
 async function encM(m,pw,net){const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),k=await deriveKey(pw,salt);const ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},k,enc.encode(JSON.stringify(m)));return{salt:b64(salt),iv:b64(iv),ct:b64(ct),network:net};}
 async function decM(r,pw){const k=await deriveKey(pw,ub64(r.salt));const pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:ub64(r.iv)},k,ub64(r.ct));return JSON.parse(dec.decode(pt));}
 
-async function buildWallet(mnemonic,net){
-  const key=await mnemonicToWalletKey(mnemonic);
+async function buildWallet(secret,net){
+  let key,mnemonic=null,seed=null;
+  if(Array.isArray(secret)){mnemonic=secret;key=await mnemonicToWalletKey(secret);}
+  else{seed=secret;key=keyPairFromSeed(ub64(secret));}
   const wallet=WalletContractV4.create({workchain:0,publicKey:key.publicKey});
   const client=new TonClient({endpoint:RPC[net]});
-  Object.assign(S,{mnemonic,key,wallet,client,network:net,address:wallet.address.toString({bounceable:false,testOnly:net==="testnet"}),raw:wallet.address.toRawString().toLowerCase()});
+  Object.assign(S,{secret,mnemonic,seed,key,wallet,client,network:net,address:wallet.address.toString({bounceable:false,testOnly:net==="testnet"}),raw:wallet.address.toRawString().toLowerCase()});
 }
 async function api(path){const r=await fetch(API[S.network]+path,{headers:{Accept:"application/json"}});if(!r.ok)throw new Error("api "+r.status);return r.json();}
 async function loadPortfolio(){
@@ -276,22 +281,23 @@ const UI={
       <label>Желаемые последние символы</label>
       <input id="vanSuffix" maxlength="4" placeholder="напр. AA, 77, ton">
       <div class="tags" style="margin:10px 0">${["AA","77","ton","ai","pp","99","xx"].map(s=>`<span class="tag" onclick="document.getElementById('vanSuffix').value='${s}'">${s}</span>`).join("")}</div>
-      <button id="genBtn" onclick="WALLET.generate()">Создать ��ошелёк</button>
+      <button id="genBtn" onclick="WALLET.generate()">Создать кошелёк</button>
       <div id="genProg" class="center muted" style="margin-top:10px;font-size:13px"></div>
       <button class="ghost" id="stopBtn" style="margin-top:10px;display:none" onclick="WALLET.stopGen()">Остановить поиск</button>
     </div>
-    <p class="center muted" style="font-size:12px">1–2 символа — быстро. 3+ может искаться очень долго.</p>
+    <p class="center muted" style="font-size:12px">1–3 символа находятся быстро. 4 символа могут искаться дольше.</p>
     <button class="ghost" style="margin-top:6px" onclick="UI.welcome()">Назад</button>`);},
 
-  createV(){this.render(`${this.brand("Seed-фраза")}
+  createV(){const isM=Array.isArray(S.pendingMnemonic);const head=isM?"Seed-фраза":"Ключ кошелька";const note=isM?"Запишите эти 24 слова по порядку. Кто знает их — получит доступ к средствам. Восстановить фразу нельзя.":"Сохраните этот секретный ключ — это единственный способ восстановить кошелёк с красивым адресом. Кто знает ключ — получит доступ к средства��.";const body=isM?`<div class="seed">${S.pendingMnemonic.map((w,i)=>`<div><span class="n">${i+1}.</span>${w}</div>`).join("")}</div>
+    <button class="ghost" onclick="navigator.clipboard.writeText('${S.pendingMnemonic.join(" ")}');toastMsg('Скопировано')">Скопировать фразу</button>`:`<div class="seed" style="grid-template-columns:1fr"><div style="word-break:break-all;font-family:monospace;font-size:13px;line-height:1.5">${esc(S.pendingSecret)}</div></div>
+    <button class="ghost" onclick="navigator.clipboard.writeText('${S.pendingSecret}');toastMsg('Скопировано')">Скопировать ключ</button>`;this.render(`${this.brand(head)}
     ${S.pendingAddr?`<p class="center eyebrow" style="display:flex;justify-content:center">Адрес заканчивается на «${esc(S.pendingAddr.slice(-4))}»</p>`:""}
-    <div class="warn" style="margin-top:12px">Запишите эти 24 слова по порядку. Кто знает их — получит доступ к средствам. Восстановить фразу нельзя.</div>
-    <div class="seed">${S.pendingMnemonic.map((w,i)=>`<div><span class="n">${i+1}.</span>${w}</div>`).join("")}</div>
-    <button class="ghost" onclick="navigator.clipboard.writeText('${S.pendingMnemonic.join(" ")}');toastMsg('Скопировано')">Скопировать фразу</button>
+    <div class="warn" style="margin-top:12px">${note}</div>
+    ${body}
     <button style="margin-top:10px" onclick="UI.passV()">Я записал(а), дальше</button>`);},
 
   importV(){this.render(`${this.brand("Импорт")}
-    <label>24 слов�� через пробел</label><textarea id="impSeed" rows="4" placeholder="word1 word2 ..."></textarea>
+    <label>24 слова через пробел или секретный ключ</label><textarea id="impSeed" rows="4" placeholder="word1 word2 ..."></textarea>
     <button id="impBtn" style="margin-top:12px" onclick="WALLET.doImport()">Продолжить</button>
     <button class="ghost" style="margin-top:10px" onclick="UI.welcome()">Назад</button>`);},
   passV(){this.render(`${this.brand("Пароль")}
@@ -373,32 +379,32 @@ window.toastMsg=toast;
 function sheet(html){$("modalRoot").innerHTML=`<div class="modal" onclick="if(event.target===this)WALLET.closeModal()"><div class="sheet">${html}</div></div>`;}
 function renderQR(text){const box=$("qr");if(!box)return;box.innerHTML="";const img=document.createElement("img");img.width=220;img.height=220;img.src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="+encodeURIComponent("ton://transfer/"+text);img.onerror=()=>box.innerHTML='<p style="color:#333">QR недоступен</p>';box.appendChild(img);}
 
-async function genVanity(suffix){let tries=0;const max=60000;while(!vanityStop&&tries<max){tries++;const m=await mnemonicNew();const key=await mnemonicToWalletKey(m);const w=WalletContractV4.create({workchain:0,publicKey:key.publicKey});const addr=w.address.toString({bounceable:false,testOnly:S.network==="testnet"});if(addr.toLowerCase().endsWith(suffix))return{m,addr,tries};if(tries%3===0){const p=$("genProg");if(p)p.textContent="Попыток: "+tries;await sleep(0);}}return null;}
+async function genVanity(suffix){let tries=0;const max=20000000,t0=performance.now(),test=S.network==="testnet";while(!vanityStop){for(let b=0;b<600;b++){tries++;const seed=crypto.getRandomValues(new Uint8Array(32));const key=keyPairFromSeed(seed);const w=WalletContractV4.create({workchain:0,publicKey:key.publicKey});const addr=w.address.toString({bounceable:false,testOnly:test});if(addr.toLowerCase().endsWith(suffix))return{seed:b64(seed),addr,tries};}const p=$("genProg");if(p)p.textContent="Попыток: "+tries.toLocaleString("ru-RU");if(tries>=max||performance.now()-t0>90000)return null;await sleep(0);}return null;}
 
 const WALLET={
   startCreate(){UI.createOptionsV();},
   async generate(){
     const suf=$("vanSuffix").value.trim();const btn=$("genBtn");
-    if(!suf){btn.disabled=true;btn.innerHTML='<span class="spin"></span>';S.pendingAddr=null;S.pendingMnemonic=await mnemonicNew();UI.createV();return;}
+    if(!suf){btn.disabled=true;btn.innerHTML='<span class="spin"></span>';S.pendingAddr=null;const m=await mnemonicNew();S.pendingMnemonic=m;S.pendingSecret=m;UI.createV();return;}
     if(!/^[A-Za-z0-9_-]{1,4}$/.test(suf)){toast("Допустимы: A-Z a-z 0-9 _ -");return;}
-    if(suf.length>2)toast("Длинное окончание может искаться долго");
+    if(suf.length>3)toast("Длинное окончание может искаться долго");
     vanityStop=false;btn.disabled=true;$("stopBtn").style.display="block";$("genProg").textContent="Поиск…";
     const res=await genVanity(suf.toLowerCase());
     btn.disabled=false;if($("stopBtn"))$("stopBtn").style.display="none";
-    if(res){S.pendingMnemonic=res.m;S.pendingAddr=res.addr;toast("Найдено за "+res.tries+" попыток");UI.createV();}
+    if(res){S.pendingMnemonic=null;S.pendingSecret=res.seed;S.pendingAddr=res.addr;toast("Найдено за "+res.tries.toLocaleString("ru-RU")+" попыток");UI.createV();}
     else if(!vanityStop){toast("Не найдено — попробуйте короче");if($("genProg"))$("genProg").textContent="";}
     else if($("genProg")){$("genProg").textContent="";}
   },
   stopGen(){vanityStop=true;},
-  async doImport(){const w=$("impSeed").value.trim().toLowerCase().split(/\s+/);if(w.length!==24){toast("Нужно 24 слова");return;}const b=$("impBtn");b.disabled=true;b.innerHTML='<span class="spin"></span>';const ok=await mnemonicValidate(w);b.disabled=false;b.textContent="Продолжить";if(!ok){toast("Неверная фраза");return;}S.pendingMnemonic=w;S.pendingAddr=null;UI.passV();},
-  async savePassword(){const p1=$("pw1").value,p2=$("pw2").value;if(p1.length<6){toast("Мин. 6 символов");return;}if(p1!==p2){toast("Пароли не совпадают");return;}const b=$("pwBtn");b.disabled=true;b.innerHTML='<span class="spin"></span>';try{const net=S.network;const rec=await encM(S.pendingMnemonic,p1,net);localStorage.setItem(STORE_KEY,JSON.stringify(rec));await buildWallet(S.pendingMnemonic,net);S.pendingMnemonic=null;S.pendingAddr=null;await enterMain();}catch(e){toast("Ошибка: "+e.message);b.disabled=false;b.textContent="Создать кошелёк";}},
+  async doImport(){const raw=$("impSeed").value.trim();const b=$("impBtn");if(/^[A-Za-z0-9+/]{43,44}=*$/.test(raw)&&!/\s/.test(raw)){try{if(ub64(raw).length!==32)throw 0;S.pendingMnemonic=null;S.pendingSecret=raw;S.pendingAddr=null;UI.passV();return;}catch(_){toast("Неверный ключ");return;}}const w=raw.toLowerCase().split(/\s+/);if(w.length!==24){toast("Нужно 24 слова или ключ");return;}b.disabled=true;b.innerHTML='<span class="spin"></span>';const ok=await mnemonicValidate(w);b.disabled=false;b.textContent="Продолжить";if(!ok){toast("Неверная фраза");return;}S.pendingMnemonic=w;S.pendingSecret=w;S.pendingAddr=null;UI.passV();},
+  async savePassword(){const p1=$("pw1").value,p2=$("pw2").value;if(p1.length<6){toast("Мин. 6 символов");return;}if(p1!==p2){toast("Пароли не совпадают");return;}const b=$("pwBtn");b.disabled=true;b.innerHTML='<span class="spin"></span>';try{const net=S.network;const rec=await encM(S.pendingSecret,p1,net);localStorage.setItem(STORE_KEY,JSON.stringify(rec));await buildWallet(S.pendingSecret,net);S.pendingMnemonic=null;S.pendingSecret=null;S.pendingAddr=null;await enterMain();}catch(e){toast("Ошибка: "+e.message);b.disabled=false;b.textContent="Создать кошелёк";}},
   async unlock(){const rec=JSON.parse(localStorage.getItem(STORE_KEY));try{const m=await decM(rec,$("unPw").value);await buildWallet(m,rec.network||"mainnet");await enterMain();}catch(e){toast("Неверный пароль");}},
   confirmReset(){if(confirm("Удалить кошелёк? Без seed-фразы восстановление невозможно.")){localStorage.removeItem(STORE_KEY);location.reload();}},
   copyAddr(){navigator.clipboard.writeText(S.address);toast("Адрес скопирован");},
   async refresh(){toast("Обновление…");await loadPortfolio();await loadEvents();UI.tab(S.tab);},
   openExplorer(){window.open(EXPLORER[S.network]+S.address,"_blank");},
-  async switchNet(net){if(net===S.network)return;const rec=JSON.parse(localStorage.getItem(STORE_KEY));rec.network=net;localStorage.setItem(STORE_KEY,JSON.stringify(rec));await buildWallet(S.mnemonic,net);await enterMain();toast("Сеть: "+net);},
-  revealSeed(){if(!confirm("Показать seed-фразу?"))return;sheet(`<div class="topbar"><h3>Seed-фраза</h3><span class="link" onclick="WALLET.closeModal()"><i class="fi fi-rr-cross-small"></i></span></div><div class="warn">Никому не показывайте.</div><div class="seed">${S.mnemonic.map((w,i)=>`<div><span class="n">${i+1}.</span>${w}</div>`).join("")}</div><button onclick="navigator.clipboard.writeText('${S.mnemonic.join(" ")}');toastMsg('Скопировано')">Скопировать</button>`);},
+  async switchNet(net){if(net===S.network)return;const rec=JSON.parse(localStorage.getItem(STORE_KEY));rec.network=net;localStorage.setItem(STORE_KEY,JSON.stringify(rec));await buildWallet(S.secret,net);await enterMain();toast("Сеть: "+net);},
+  revealSeed(){if(!confirm("Показать секрет кошелька?"))return;const isM=Array.isArray(S.mnemonic);const inner=isM?`<div class="seed">${S.mnemonic.map((w,i)=>`<div><span class="n">${i+1}.</span>${w}</div>`).join("")}</div><button onclick="navigator.clipboard.writeText('${S.mnemonic.join(" ")}');toastMsg('Скопировано')">Скопировать</button>`:`<div class="seed" style="grid-template-columns:1fr"><div style="word-break:break-all;font-family:monospace;font-size:13px;line-height:1.5">${esc(S.seed)}</div></div><button onclick="navigator.clipboard.writeText('${S.seed}');toastMsg('Скопировано')">Скопировать ключ</button>`;sheet(`<div class="topbar"><h3>${isM?"Seed-фраза":"Ключ кошелька"}</h3><span class="link" onclick="WALLET.closeModal()"><i class="fi fi-rr-cross-small"></i></span></div><div class="warn">Никому не показывайте.</div>${inner}`);},
   closeModal(){$("modalRoot").innerHTML="";},
 
   openReceive(){sheet(`<div class="topbar"><h3>Получить</h3><span class="link" onclick="WALLET.closeModal()"><i class="fi fi-rr-cross-small"></i></span></div><p class="center muted" style="font-size:13px">Отсканируйте QR или скопируйте адрес</p><div id="qr"></div><p class="center" style="word-break:break-all;font-size:13px">${esc(S.address)}</p><button style="margin-top:12px" onclick="WALLET.copyAddr()">Скопировать адрес</button>`);renderQR(S.address);},
