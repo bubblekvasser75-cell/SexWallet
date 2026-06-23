@@ -67,11 +67,11 @@ label{display:block;margin:12px 0 6px;font-size:13px;color:var(--muted);}
 .addr{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--violet2);cursor:pointer;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);}
 .addr:hover{border-color:var(--violet);}
 .actions{display:flex;gap:12px;margin:16px 0 4px;animation:rise .55s ease both;}
-.actions button{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 0;font-size:13px;font-weight:600;border-radius:22px;background:linear-gradient(150deg,rgba(255,255,255,.14),rgba(255,255,255,.04) 55%,rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);box-shadow:0 10px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.28),inset 0 -10px 24px rgba(124,58,237,.08);transition:transform .28s cubic-bezier(.34,1.4,.5,1),box-shadow .25s,border-color .25s;}
-.actions button::before{content:'';position:absolute;top:-70%;left:-45%;width:55%;height:240%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.22),transparent);transform:rotate(8deg);animation:sheen 22s ease-in-out infinite;pointer-events:none;}
-.actions button:hover{transform:translateY(-3px);border-color:rgba(167,139,250,.5);box-shadow:0 16px 38px rgba(60,40,140,.5),inset 0 1px 0 rgba(255,255,255,.35);}
+.actions button{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 0;font-size:13px;font-weight:600;border-radius:22px;background:linear-gradient(150deg,rgba(255,255,255,.14),rgba(255,255,255,.04) 55%,rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);box-shadow:0 10px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.28),inset 0 -10px 24px rgba(0,152,234,.12);transition:transform .28s cubic-bezier(.34,1.4,.5,1),box-shadow .25s,border-color .25s;}
+.actions button::before{content:'';position:absolute;top:-70%;left:-45%;width:55%;height:240%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.22),transparent);transform:rotate(8deg);animation:sheen 7s ease-in-out infinite;pointer-events:none;}
+.actions button:hover{transform:translateY(-3px);border-color:rgba(90,190,255,.55);box-shadow:0 16px 38px rgba(0,110,200,.45),inset 0 1px 0 rgba(255,255,255,.35);}
 .actions button:active{transform:translateY(-1px) scale(.98);}
-.actions .ic{position:relative;overflow:hidden;width:48px;height:48px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:19px;color:#fff;background:linear-gradient(150deg,#3aa6ff,#2b9bf4 35%,#7c3aed);box-shadow:0 8px 20px rgba(60,90,230,.45),inset 0 1px 0 rgba(255,255,255,.5),inset 0 -8px 14px rgba(0,0,0,.18);}
+.actions .ic{position:relative;overflow:hidden;width:48px;height:48px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:19px;color:#fff;background:linear-gradient(160deg,#5cb7ff,#0098ea 55%,#0a74d6);box-shadow:0 8px 22px rgba(0,140,230,.5),inset 0 1px 0 rgba(255,255,255,.55),inset 0 -8px 14px rgba(0,0,0,.18);}
 .actions .ic::after{content:'';position:absolute;top:0;left:0;right:0;height:55%;background:linear-gradient(180deg,rgba(255,255,255,.45),transparent);pointer-events:none;}
 .sect{display:flex;align-items:center;justify-content:space-between;margin:4px 2px;}
 .sect h3{font-size:15px;font-weight:500;}
@@ -98,6 +98,15 @@ label{display:block;margin:12px 0 6px;font-size:13px;color:var(--muted);}
 .mkt .em{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:19px;color:#fff;background:linear-gradient(135deg,#8b5cf6,#6d28d9);}
 .mkt .nm{flex:1;} .mkt .nm .t{font-weight:600;} .mkt .nm .s{font-size:12px;color:var(--muted);}
 .mkt .go{color:var(--muted);font-size:15px;}
+.nftgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;animation:rise .5s ease both;}
+.nftc{position:relative;overflow:hidden;border-radius:18px;border:1px solid rgba(255,255,255,.14);background:linear-gradient(150deg,rgba(255,255,255,.09),rgba(255,255,255,.02));backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);cursor:pointer;transition:transform .25s cubic-bezier(.34,1.4,.5,1),box-shadow .25s,border-color .25s;box-shadow:0 8px 24px rgba(0,0,0,.35);}
+.nftc:hover{transform:translateY(-3px);border-color:rgba(90,190,255,.5);box-shadow:0 14px 34px rgba(0,110,200,.4);}
+.nfthumb{position:relative;aspect-ratio:1;background:rgba(255,255,255,.04);}
+.nfthumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1;}
+.nfph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:34px;color:var(--muted);}
+.nftm{padding:10px 12px;}
+.nftm .t{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.nftm .s{font-size:11.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .tabbar{position:sticky;bottom:0;z-index:20;display:flex;gap:6px;margin:0 12px calc(12px + env(safe-area-inset-bottom));padding:7px;background:linear-gradient(135deg,rgba(255,255,255,.11),rgba(255,255,255,.03));backdrop-filter:blur(34px) saturate(180%);-webkit-backdrop-filter:blur(34px) saturate(180%);border:1px solid rgba(255,255,255,.16);border-radius:28px;box-shadow:0 14px 44px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.2);}
 .tabbar button{position:relative;flex:1;background:transparent;color:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-size:10.5px;font-weight:600;padding:9px 0;border-radius:20px;transition:transform .28s cubic-bezier(.34,1.4,.5,1),background .25s,color .25s,box-shadow .25s;}
 .tabbar button .ic{font-size:20px;transition:.25s;}
@@ -145,10 +154,8 @@ label{display:block;margin:12px 0 6px;font-size:13px;color:var(--muted);}
 /* v4: liquid glass + water ripple */
 #app{backdrop-filter:blur(30px) saturate(135%);-webkit-backdrop-filter:blur(30px) saturate(135%);}
 .card{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(26px) saturate(150%);-webkit-backdrop-filter:blur(26px) saturate(150%);}
-.card::after{content:'';position:absolute;top:-60%;left:-45%;width:55%;height:220%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.16),transparent);transform:rotate(8deg);animation:sheen 26s ease-in-out infinite;pointer-events:none;}
-@keyframes sheen{0%{left:-60%}9%{left:140%}100%{left:140%}}
-body.noanim *,body.noanim *::before,body.noanim *::after{animation:none!important;transition:none!important;}
-body.noanim .ripple,body.noanim .orb,body.noanim .star{display:none!important;}
+.card::after{content:'';position:absolute;top:-60%;left:-45%;width:55%;height:220%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.16),transparent);transform:rotate(8deg);animation:sheen 8s ease-in-out infinite;pointer-events:none;}
+@keyframes sheen{0%,100%{left:-45%}50%{left:135%}}
 .modal .sheet{backdrop-filter:blur(34px) saturate(150%);-webkit-backdrop-filter:blur(34px) saturate(150%);}
 .actions button,.icbtn,.pill,.addr,.tag,.mkt,.eyebrow,.tok:hover{backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);}
 .tok img,.tok .logo,.clogo{box-shadow:0 6px 18px rgba(124,58,237,.4);}
@@ -164,6 +171,7 @@ body.noanim .ripple,body.noanim .orb,body.noanim .star{display:none!important;}
     <button data-tab="home" class="on" onclick="UI.tab('home')"><i class="fi fi-rr-wallet ic"></i>Кошелёк</button>
     <button data-tab="history" onclick="UI.tab('history')"><i class="fi fi-rr-time-past ic"></i>История</button>
     <button data-tab="markets" onclick="UI.tab('markets')"><i class="fi fi-rr-apps ic"></i>Маркеты</button>
+    <button data-tab="nft" onclick="UI.tab('nft')"><i class="fi fi-rr-gem ic"></i>NFT</button>
     <button data-tab="settings" onclick="UI.tab('settings')"><i class="fi fi-rr-settings ic"></i>Настр.</button>
   </div>
   <div id="modalRoot"></div>
@@ -180,7 +188,7 @@ const RPC={mainnet:"https://toncenter.com/api/v2/jsonRPC",testnet:"https://testn
 const API={mainnet:"https://tonapi.io",testnet:"https://testnet.tonapi.io"};
 const EXPLORER={mainnet:"https://tonviewer.com/",testnet:"https://testnet.tonviewer.com/"};
 const DIAMOND='<svg viewBox="0 0 24 24" fill="none"><path d="M3 8l9 12 9-12-4-4H7L3 8z" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 8h18M8 4l4 16 4-16" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg>';
-const GRAM_SVG=`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='gb' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#34b0ff'/><stop offset='1' stop-color='#0072c9'/></linearGradient></defs><circle cx='32' cy='32' r='30' fill='url(#gb)'/><path d='M17 24 H47 L32 49 Z' fill='#ffffff'/><path d='M32 24 V49' stroke='#bfe1ff' stroke-width='1.4' stroke-linejoin='round'/><path d='M17 24 L32 33 L47 24' fill='none' stroke='#bfe1ff' stroke-width='1.4' stroke-linejoin='round'/></svg>`;
+const GRAM_SVG=`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><radialGradient id='gg' cx='35%' cy='28%' r='80%'><stop offset='0' stop-color='#e3d9ff'/><stop offset='52%' stop-color='#7c3aed'/><stop offset='100%' stop-color='#2c0960'/></radialGradient><linearGradient id='gs' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#ff8fd6'/><stop offset='1' stop-color='#8b5cf6'/></linearGradient></defs><circle cx='32' cy='32' r='30' fill='url(#gg)'/><circle cx='32' cy='32' r='30' fill='none' stroke='url(#gs)' stroke-width='2.5'/><path d='M41 25c-2.2-2.8-5.3-4.2-8.7-4.2-7 0-12.3 5.2-12.3 11.9 0 6.9 5.2 12.1 12.3 12.1 4.2 0 7.6-1.9 9.7-5.1v-7.9H30.5' fill='none' stroke='#fff' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round'/></svg>`;
 const GRAM_IMG="data:image/svg+xml;utf8,"+encodeURIComponent(GRAM_SVG);
 const FEATURED={mainnet:[{master:"EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs",decimals:6,symbol:"USD₮",name:"Tether USD",image:"https://assets.coingecko.com/coins/images/325/large/Tether.png"}],testnet:[]};
 const MARKETS=[
@@ -250,7 +258,7 @@ function buildSpark(points){
 const UI={
   render(html,tabs=false){scr().innerHTML=html;$("tabbar").classList.toggle("hidden",!tabs);},
   brand(t){return`<div class="brand"><div class="mark">${DIAMOND}</div><span>${t}</span></div>`;},
-  tab(name){S.tab=name;document.querySelectorAll(".tabbar button").forEach(b=>b.classList.toggle("on",b.dataset.tab===name));({home:UI.home,history:UI.history,markets:UI.markets,settings:UI.settings}[name]).call(UI);},
+  tab(name){S.tab=name;document.querySelectorAll(".tabbar button").forEach(b=>b.classList.toggle("on",b.dataset.tab===name));({home:UI.home,history:UI.history,markets:UI.markets,nft:UI.nft,settings:UI.settings}[name]).call(UI);},
 
   welcome(){this.render(`${this.brand(APP_NAME)}
     <p class="center muted" style="margin:10px 0 18px">Некастодиальный кошелёк для сети TON</p>
@@ -326,10 +334,20 @@ const UI={
     }}
     this.render(`<div class="head"><h2 style="font-size:22px">История</h2><button class="icbtn" onclick="WALLET.refresh()"><i class="fi fi-rr-refresh"></i></button></div><div class="card">${rows}</div>`,true);
   },
+  async nft(){
+    this.render(`<div class="head"><h2 style="font-size:22px">NFT</h2><button class="icbtn" onclick="WALLET.refresh()"><i class="fi fi-rr-refresh"></i></button></div><div class="card"><div class="empty">Загрузка…</div></div>`,true);
+    let items=[];
+    try{const d=await api(`/v2/accounts/${S.address}/nfts?limit=100&indirect_ownership=false`);items=d.nft_items||[];}catch(e){}
+    if(S.tab!=="nft")return;
+    let body;
+    if(!items.length){body=`<div class="card"><div class="empty">На кошелёк пока не приходили NFT</div></div>`;}
+    else{body=`<div class="nftgrid">`+items.map(n=>{const pv=n.previews||[];const img=(pv.find(p=>p.resolution==="500x500")||pv[pv.length-1]||{}).url||n.metadata?.image||"";const name=esc(n.metadata?.name||("NFT #"+(n.index||"")));const col=esc(n.collection?.name||"");const link=EXPLORER[S.network]+(n.address||"");return `<div class="nftc" onclick="window.open('${link}','_blank')"><div class="nfthumb">${img?`<img src="${esc(img)}" loading="lazy" onerror="this.style.display='none'">`:""}<div class="nfph"><i class="fi fi-rr-gem"></i></div></div><div class="nftm"><div class="t">${name}</div>${col?`<div class="s">${col}</div>`:""}</div></div>`;}).join("")+`</div>`;}
+    if(S.tab!=="nft")return;
+    this.render(`<div class="head"><h2 style="font-size:22px">NFT</h2><button class="icbtn" onclick="WALLET.refresh()"><i class="fi fi-rr-refresh"></i></button></div>${body}`,true);
+  },
   markets(){
     const list=MARKETS.map(m=>`<div class="mkt" onclick="window.open('${m.url}','_blank')"><div class="em"><i class="fi ${m.ic}"></i></div><div class="nm"><div class="t">${m.t}</div><div class="s">${m.s}</div></div><div class="go"><i class="fi fi-rr-angle-small-right"></i></div></div>`).join("");
     this.render(`<div class="head"><h2 style="font-size:22px">Маркеты</h2></div>
-      <div class="promo" onclick="window.open('https://t.me/portals/market','_blank')"><div class="pglow"></div><div class="pinfo"><span class="ptag">0% КОМИССИЯ</span><div class="ptitle">Подарки Telegram</div><div class="psub">Покупайте и продавайте за GRAM</div></div><div class="pico"><i class="fi fi-rr-gift"></i></div></div>
       <div class="tags"><span class="tag">Подарки</span><span class="tag">NFT</span><span class="tag">DEX</span><span class="tag">TON Connect</span></div>
       ${list}
       <div class="card"><div class="sect"><h3>Подключение (TON Connect)</h3></div>
@@ -345,7 +363,6 @@ const UI={
       <button class="ghost" style="margin-top:10px" onclick="WALLET.revealSeed()">Показать seed-фразу</button>
       <button class="danger" style="margin-top:10px" onclick="WALLET.confirmReset()">Удалить кошелёк</button>
     </div>
-    <div class="card"><label>Внешний вид</label><button class="ghost" style="margin-top:6px" onclick="WALLET.toggleAnim()">${document.body.classList.contains('noanim')?'Включить анимации':'Выключить анимации'}</button><p class="muted" style="font-size:12px;margin-top:8px">Отключает блики и движущиеся эффекты для спокойного вида.</p></div>
     <p class="center muted" style="font-size:12px;word-break:break-all">${esc(S.address)}</p>
     <p class="center muted" style="font-size:11px;margin-top:6px">${APP_NAME}</p>`,true);},
 };
@@ -376,7 +393,6 @@ const WALLET={
   async savePassword(){const p1=$("pw1").value,p2=$("pw2").value;if(p1.length<6){toast("Мин. 6 символов");return;}if(p1!==p2){toast("Пароли не совпадают");return;}const b=$("pwBtn");b.disabled=true;b.innerHTML='<span class="spin"></span>';try{const net=S.network;const rec=await encM(S.pendingMnemonic,p1,net);localStorage.setItem(STORE_KEY,JSON.stringify(rec));await buildWallet(S.pendingMnemonic,net);S.pendingMnemonic=null;S.pendingAddr=null;await enterMain();}catch(e){toast("Ошибка: "+e.message);b.disabled=false;b.textContent="Создать кошелёк";}},
   async unlock(){const rec=JSON.parse(localStorage.getItem(STORE_KEY));try{const m=await decM(rec,$("unPw").value);await buildWallet(m,rec.network||"mainnet");await enterMain();}catch(e){toast("Неверный пароль");}},
   confirmReset(){if(confirm("Удалить кошелёк? Без seed-фразы восстановление невозможно.")){localStorage.removeItem(STORE_KEY);location.reload();}},
-  toggleAnim(){const off=!document.body.classList.contains("noanim");document.body.classList.toggle("noanim",off);localStorage.setItem("pisun_anim",off?"off":"on");UI.settings();toast(off?"Анимации выключены":"Анимации включены");},
   copyAddr(){navigator.clipboard.writeText(S.address);toast("Адрес скопирован");},
   async refresh(){toast("Обновление…");await loadPortfolio();await loadEvents();UI.tab(S.tab);},
   openExplorer(){window.open(EXPLORER[S.network]+S.address,"_blank");},
@@ -429,7 +445,7 @@ const WALLET={
       <label>Актив</label><select id="sAsset">${opts}</select>
       <label>Адрес получателя</label><input id="sTo" placeholder="EQ... / UQ...">
       <label>Сумма</label><input id="sAmt" type="number" step="any" placeholder="0.0">
-      <label>Ко��ментарий (необяз.)</label><input id="sCom">
+      <label>Комментарий (необяз.)</label><input id="sCom">
       <button id="sBtn" style="margin-top:14px" onclick="WALLET.doSend()">Отправить</button>
       <p class="muted" style="font-size:12px;margin-top:10px;text-align:center">Комиссия сети: ~0.005 TON · токены ~0.05 TON</p>`);
     if(preselect&&preselect!=="TON"){const o=$("sAsset");if([...o.options].some(x=>x.value===preselect))o.value=preselect;}
@@ -484,7 +500,6 @@ async function enterMain(){
 
 (function boot(){
   const sc=$("stars");if(sc){let h="";for(let i=0;i<46;i++){h+=`<span class="star" style="left:${(Math.random()*100).toFixed(2)}%;top:${(Math.random()*100).toFixed(2)}%;animation-delay:${(Math.random()*4).toFixed(1)}s"></span>`;}sc.innerHTML=h;}
-  if(localStorage.getItem("pisun_anim")==="off")document.body.classList.add("noanim");
   if(localStorage.getItem(STORE_KEY))UI.unlockV();else UI.welcome();
 })();
 </script>
