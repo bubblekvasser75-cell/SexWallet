@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>PisunWallet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css">
+<style>
+:root{
+  --bg:#07060f;--violet:#8b5cf6;--violet2:#a78bfa;--violet3:#c4b5fd;--glow:#7c3aed;
+  --text:#ECEAF6;--muted:#9d98b8;--muted2:#6f6a8d;
+  --card:rgba(255,255,255,.04);--card2:rgba(255,255,255,.06);--line:rgba(255,255,255,.09);
+  --ok:#34d399;--err:#f87171;--radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);display:flex;justify-content:center;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+.bg-wrap{position:fixed;inset:0;z-index:0;overflow:hidden;background:radial-gradient(1200px 800px at 50% -10%,#18103a 0%,transparent 60%),radial-gradient(900px 700px at 85% 10%,#1a0f33 0%,transparent 55%),linear-gradient(180deg,#07060f,#0a0818);}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;animation:float 16s ease-in-out infinite;}
+.orb.a{width:480px;height:480px;left:50%;top:4%;transform:translateX(-50%);background:radial-gradient(circle,#7c3aed,#3b0a78 60%,transparent 70%);}
+.orb.b{width:340px;height:340px;left:-10%;top:42%;background:radial-gradient(circle,#6d28d9,transparent 70%);animation-delay:-4s;}
+.orb.c{width:380px;height:380px;right:-12%;top:55%;background:radial-gradient(circle,#9333ea,transparent 70%);animation-delay:-8s;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-40px)}}
+.orb.a{transform:translateX(-50%)}
+.stars{position:absolute;inset:0;pointer-events:none;}
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.4;animation:tw 4s ease-in-out infinite;}
+@keyframes tw{0%,100%{opacity:.12}50%{opacity:.7}}
+.grain{position:absolute;inset:0;opacity:.05;background-image:radial-gradient(rgba(255,255,255,.6) 1px,transparent 1px);background-size:3px 3px;pointer-events:none;}
+#app{position:relative;z-index:2;width:100%;max-width:480px;min-height:100vh;display:flex;flex-direction:column;background:rgba(7,6,15,.5);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-left:1px solid var(--line);border-right:1px solid var(--line);}
+.screen{flex:1;overflow-y:auto;padding:18px 16px 98px;}
+h1,h2,h3{font-family:'Manrope',sans-serif;letter-spacing:-.02em;font-weight:600;}
+.muted{color:var(--muted);}
+.center{text-align:center;}
+i.fi{display:inline-flex;line-height:0;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:12px 0;backdrop-filter:blur(14px);box-shadow:0 18px 50px rgba(0,0,0,.4);animation:rise .5s ease both;}
+button{cursor:pointer;border:none;border-radius:14px;padding:15px 16px;font-family:'Inter';font-size:15px;font-weight:600;color:#fff;width:100%;transition:.2s;background:linear-gradient(135deg,#2b9bf4,#7c3aed);}
+button:hover{box-shadow:0 0 22px rgba(124,58,237,.5);transform:translateY(-1px);}
+button:active{transform:scale(.98);}
+button:disabled{opacity:.55;cursor:not-allowed;}
+button.ghost{background:rgba(255,255,255,.04);border:1px solid var(--line);} button.ghost:hover{border-color:var(--violet);box-shadow:0 0 18px rgba(124,58,237,.35);}
+button.danger{background:transparent;color:var(--err);border:1px solid rgba(248,113,113,.4);} button.danger:hover{background:rgba(248,113,113,.1);box-shadow:none;}
+.row{display:flex;gap:10px;} .row>*{flex:1;}
+input,textarea,select{width:100%;background:#13102a;border:1px solid var(--line);border-radius:13px;padding:14px;color:var(--text);font-family:'Inter';font-size:15px;outline:none;resize:none;transition:.15s;}
+input:focus,textarea:focus,select:focus{border-color:var(--violet);box-shadow:0 0 0 3px rgba(139,92,246,.18);}
+label{display:block;margin:12px 0 6px;font-size:13px;color:var(--muted);}
+.hidden{display:none!important;}
+.brand{display:flex;align-items:center;gap:12px;justify-content:center;margin:30px 0 8px;}
+.brand .mark{width:38px;height:38px;border-radius:11px;background:radial-gradient(circle at 30% 30%,#c4b5fd,#7c3aed 60%,#4c1d95);box-shadow:0 0 22px rgba(124,58,237,.7),inset 0 0 12px rgba(255,255,255,.35);display:grid;place-items:center;}
+.brand .mark svg{width:20px;height:20px;}
+.brand span{font-family:'Manrope';font-size:21px;font-weight:600;letter-spacing:-.01em;}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:12.5px;color:var(--violet3);}
+.head{display:flex;align-items:center;justify-content:space-between;padding:2px;animation:rise .45s ease both;}
+.pill{font-size:12px;font-weight:500;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--muted);text-transform:capitalize;}
+.pill.test{color:#ffd87a;border-color:rgba(255,216,122,.35);}
+.icbtn{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--violet3);}
+.icbtn:hover{border-color:var(--violet);box-shadow:0 0 16px rgba(124,58,237,.4);transform:none;}
+.balwrap{position:relative;text-align:center;padding:34px 0 14px;animation:rise .5s ease both;}
+.hero-glow{position:absolute;left:50%;top:30%;transform:translateX(-50%);width:420px;height:220px;background:radial-gradient(ellipse at center,rgba(167,139,250,.45),rgba(124,58,237,.12) 45%,transparent 70%);filter:blur(16px);z-index:-1;animation:pulse 6s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:.6;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.08)}}
+.balance{font-family:'Manrope';font-size:48px;font-weight:300;line-height:1;background:linear-gradient(180deg,#fff 30%,#b9a9e8 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.balance small{font-family:'Inter';font-size:18px;font-weight:500;color:var(--muted);-webkit-text-fill-color:var(--muted);}
+.balusd{color:var(--muted);font-size:15px;margin-top:8px;}
+.addr{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--violet2);cursor:pointer;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);}
+.addr:hover{border-color:var(--violet);}
+.actions{display:flex;gap:12px;margin:16px 0 4px;animation:rise .55s ease both;}
+.actions button{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 0;font-size:13px;font-weight:600;border-radius:22px;background:linear-gradient(150deg,rgba(255,255,255,.14),rgba(255,255,255,.04) 55%,rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);box-shadow:0 10px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.28),inset 0 -10px 24px rgba(0,152,234,.12);transition:transform .28s cubic-bezier(.34,1.4,.5,1),box-shadow .25s,border-color .25s;}
+.actions button::before{content:'';position:absolute;top:-70%;left:-45%;width:55%;height:240%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.22),transparent);transform:rotate(8deg);animation:sheen 7s ease-in-out infinite;pointer-events:none;}
+.actions button:hover{transform:translateY(-3px);border-color:rgba(90,190,255,.55);box-shadow:0 16px 38px rgba(0,110,200,.45),inset 0 1px 0 rgba(255,255,255,.35);}
+.actions button:active{transform:translateY(-1px) scale(.98);}
+.actions .ic{position:relative;overflow:hidden;width:48px;height:48px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:19px;color:#fff;background:linear-gradient(160deg,#5cb7ff,#0098ea 55%,#0a74d6);box-shadow:0 8px 22px rgba(0,140,230,.5),inset 0 1px 0 rgba(255,255,255,.55),inset 0 -8px 14px rgba(0,0,0,.18);}
+.actions .ic::after{content:'';position:absolute;top:0;left:0;right:0;height:55%;background:linear-gradient(180deg,rgba(255,255,255,.45),transparent);pointer-events:none;}
+.sect{display:flex;align-items:center;justify-content:space-between;margin:4px 2px;}
+.sect h3{font-size:15px;font-weight:500;}
+.tok{display:flex;align-items:center;gap:13px;padding:13px 4px;border-bottom:1px solid var(--line);cursor:pointer;transition:.15s;border-radius:12px;}
+.tok:last-child{border-bottom:none;} .tok:hover{background:rgba(255,255,255,.03);}
+.tok .logo,.tok img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.tok .logo{display:flex;align-items:center;justify-content:center;font-weight:600;color:#fff;background:rgba(255,255,255,.06);border:1px solid var(--line);}
+.tok .logo.ton{background:radial-gradient(circle at 30% 30%,#c4b5fd,#7c3aed 65%);}
+.tok .logo.ton svg{width:22px;height:22px;}
+.tok .nm{flex:1;min-width:0;} .tok .nm .t{font-weight:500;} .tok .nm .s{font-size:12px;color:var(--muted);}
+.tok .am{text-align:right;font-weight:600;} .tok .am .u{font-size:12px;color:var(--muted);font-weight:400;}
+.tx{display:flex;justify-content:space-between;align-items:center;padding:13px 4px;border-bottom:1px solid var(--line);}
+.tx:last-child{border-bottom:none;}
+.tx .l{display:flex;align-items:center;gap:12px;min-width:0;}
+.tx .ico{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--violet3);}
+.tx .ico.in{color:var(--ok);}
+.tx .d{min-width:0;} .tx .d .t{font-weight:500;} .tx .d .s{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:185px;}
+.tx .a{font-weight:600;white-space:nowrap;} .tx .a.in{color:var(--ok);}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:10px 2px 14px;}
+.tag{font-size:12.5px;font-weight:500;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:#cdc7e6;cursor:pointer;transition:.15s;}
+.tag:hover{border-color:var(--violet);color:#fff;}
+.mkt{display:flex;align-items:center;gap:13px;padding:13px;border:1px solid var(--line);border-radius:16px;margin:10px 0;background:var(--card);cursor:pointer;transition:.16s;animation:rise .45s ease both;}
+.mkt:hover{transform:translateY(-2px);border-color:rgba(167,139,250,.45);box-shadow:0 12px 30px rgba(0,0,0,.4);}
+.mkt .em{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:19px;color:#fff;background:linear-gradient(135deg,#8b5cf6,#6d28d9);}
+.mkt .nm{flex:1;} .mkt .nm .t{font-weight:600;} .mkt .nm .s{font-size:12px;color:var(--muted);}
+.mkt .go{color:var(--muted);font-size:15px;}
+.nftgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;animation:rise .5s ease both;}
+.nftc{position:relative;overflow:hidden;border-radius:18px;border:1px solid rgba(255,255,255,.14);background:linear-gradient(150deg,rgba(255,255,255,.09),rgba(255,255,255,.02));backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);cursor:pointer;transition:transform .25s cubic-bezier(.34,1.4,.5,1),box-shadow .25s,border-color .25s;box-shadow:0 8px 24px rgba(0,0,0,.35);}
+.nftc:hover{transform:translateY(-3px);border-color:rgba(90,190,255,.5);box-shadow:0 14px 34px rgba(0,110,200,.4);}
+.nfthumb{position:relative;aspect-ratio:1;background:rgba(255,255,255,.04);}
+.nfthumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1;}
+.nfph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:34px;color:var(--muted);}
+.nftm{padding:10px 12px;}
+.nftm .t{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.nftm .s{font-size:11.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tabbar{position:sticky;bottom:0;z-index:20;display:flex;gap:6px;margin:0 12px calc(12px + env(safe-area-inset-bottom));padding:7px;background:linear-gradient(135deg,rgba(255,255,255,.11),rgba(255,255,255,.03));backdrop-filter:blur(34px) saturate(180%);-webkit-backdrop-filter:blur(34px) saturate(180%);border:1px solid rgba(255,255,255,.16);border-radius:28px;box-shadow:0 14px 44px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.2);}
+.tabbar button{position:relative;flex:1;background:transparent;color:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-size:10.5px;font-weight:600;padding:9px 0;border-radius:20px;transition:transform .28s cubic-bezier(.34,1.4,.5,1),background .25s,color .25s,box-shadow .25s;}
+.tabbar button .ic{font-size:20px;transition:.25s;}
+.tabbar button:hover{background:rgba(255,255,255,.05);box-shadow:none;transform:none;color:#cfc9ec;}
+.tabbar button.on{color:#fff;background:linear-gradient(135deg,rgba(43,155,244,.92),rgba(124,58,237,.94));box-shadow:0 8px 24px rgba(60,90,230,.5),inset 0 1px 0 rgba(255,255,255,.35);transform:translateY(-3px);}
+.tabbar button.on .ic{color:#fff;transform:scale(1.08);filter:drop-shadow(0 2px 7px rgba(0,0,0,.4));}
+.seed{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0;}
+.seed div{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;}
+.seed .n{color:var(--muted);margin-right:6px;}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:98px;background:rgba(16,12,32,.96);border:1px solid var(--line);padding:12px 18px;border-radius:13px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:90%;text-align:center;backdrop-filter:blur(10px);}
+.toast.show{opacity:1;}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;z-index:50;backdrop-filter:blur(4px);}
+.modal .sheet{width:100%;max-width:480px;background:linear-gradient(180deg,rgba(22,16,44,.97),rgba(12,9,24,.99));border:1px solid var(--line);border-radius:26px 26px 0 0;padding:20px 16px calc(22px + env(safe-area-inset-bottom));max-height:92vh;overflow-y:auto;animation:up .25s ease;backdrop-filter:blur(20px);}
+@keyframes up{from{transform:translateY(60px);opacity:.5}to{transform:none;opacity:1}}
+@keyframes rise{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.topbar h3{font-size:18px;font-weight:600;}
+.link{color:var(--violet2);cursor:pointer;font-size:18px;display:inline-flex;}
+.spin{display:inline-block;width:17px;height:17px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:s .7s linear infinite;vertical-align:middle;}
+@keyframes s{to{transform:rotate(360deg)}}
+.warn{background:rgba(255,216,122,.08);border:1px solid rgba(255,216,122,.32);color:#ffd87a;border-radius:14px;padding:13px;font-size:13px;line-height:1.55;}
+#qr{display:flex;justify-content:center;margin:16px 0;background:#fff;padding:14px;border-radius:18px;}
+.empty{color:var(--muted);padding:18px 4px;text-align:center;}
+/* coin detail */
+.chead{display:flex;align-items:center;gap:13px;margin-bottom:6px;}
+.clogo{width:50px;height:50px;border-radius:50%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:1px solid var(--line);font-weight:600;}
+.clogo.ton{background:radial-gradient(circle at 30% 30%,#c4b5fd,#7c3aed 65%);} .clogo.ton svg{width:26px;height:26px;}
+.cprice{font-family:'Manrope';font-size:34px;font-weight:300;margin-top:6px;}
+.cdiff{font-size:14px;font-weight:600;margin-top:2px;color:var(--muted);}
+.cdiff.pos{color:var(--ok);} .cdiff.neg{color:var(--err);}
+.chart{margin:16px 0 6px;}
+.crow{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px;} .crow:last-child{border-bottom:none;}
+@media(max-width:380px){.balance{font-size:40px;}}
+/* v5: chart ranges + portals-style promo */
+.ranges{display:flex;gap:6px;margin:10px 0 6px;}
+.rbtn{flex:1;width:auto;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--muted);font-size:12px;font-weight:700;padding:8px 0;border-radius:11px;backdrop-filter:blur(10px);transition:.2s;}
+.rbtn.on{color:#fff;background:linear-gradient(135deg,#2b9bf4,#7c3aed);border-color:transparent;box-shadow:0 6px 18px rgba(43,120,230,.4);}
+.promo{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;padding:18px;border-radius:20px;margin:4px 0 14px;cursor:pointer;background:linear-gradient(120deg,#0098ea,#5b6cff 45%,#9b4dff);border:1px solid rgba(255,255,255,.2);box-shadow:0 18px 44px rgba(40,70,210,.35);animation:rise .5s ease both;}
+.promo .pglow{position:absolute;inset:0;background:radial-gradient(220px 130px at 85% 15%,rgba(255,255,255,.4),transparent 70%);pointer-events:none;}
+.promo .pinfo{flex:1;position:relative;z-index:1;}
+.promo .ptag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.02em;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.25);backdrop-filter:blur(6px);margin-bottom:9px;}
+.promo .ptitle{font-family:'Manrope';font-weight:800;font-size:21px;line-height:1.08;}
+.promo .psub{font-size:12.5px;opacity:.92;margin-top:4px;}
+.promo .pico{position:relative;z-index:1;width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:25px;background:rgba(255,255,255,.22);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.3);}
+/* v4: liquid glass + water ripple */
+#app{backdrop-filter:blur(30px) saturate(135%);-webkit-backdrop-filter:blur(30px) saturate(135%);}
+.card{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(26px) saturate(150%);-webkit-backdrop-filter:blur(26px) saturate(150%);}
+.card::after{content:'';position:absolute;top:-60%;left:-45%;width:55%;height:220%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.16),transparent);transform:rotate(8deg);animation:sheen 8s ease-in-out infinite;pointer-events:none;}
+@keyframes sheen{0%,100%{left:-45%}50%{left:135%}}
+.modal .sheet{backdrop-filter:blur(34px) saturate(150%);-webkit-backdrop-filter:blur(34px) saturate(150%);}
+.actions button,.icbtn,.pill,.addr,.tag,.mkt,.eyebrow,.tok:hover{backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);}
+.tok img,.tok .logo,.clogo{box-shadow:0 6px 18px rgba(124,58,237,.4);}
+.ripple{position:absolute;inset:-30%;pointer-events:none;opacity:.07;mix-blend-mode:screen;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.011 0.018' numOctaves='2' seed='8'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:520px 520px;animation:drift 26s linear infinite;}
+@keyframes drift{0%{transform:translate(0,0) scale(1.25) rotate(0deg)}50%{transform:translate(-5%,4%) scale(1.4) rotate(8deg)}100%{transform:translate(0,0) scale(1.25) rotate(0deg)}}
+</style>
+</head>
+<body>
+<div class="bg-wrap"><div class="orb a"></div><div class="orb b"></div><div class="orb c"></div><div class="ripple"></div><div class="stars" id="stars"></div><div class="grain"></div></div>
+<div id="app">
+  <div id="screen" class="screen"></div>
+  <div class="tabbar hidden" id="tabbar">
+    <button data-tab="home" class="on" onclick="UI.tab('home')"><i class="fi fi-rr-wallet ic"></i>Кошелёк</button>
+    <button data-tab="history" onclick="UI.tab('history')"><i class="fi fi-rr-time-past ic"></i>История</button>
+    <button data-tab="markets" onclick="UI.tab('markets')"><i class="fi fi-rr-apps ic"></i>Маркеты</button>
+    <button data-tab="nft" onclick="UI.tab('nft')"><i class="fi fi-rr-gem ic"></i>NFT</button>
+    <button data-tab="settings" onclick="UI.tab('settings')"><i class="fi fi-rr-settings ic"></i>Настр.</button>
+  </div>
+  <div id="modalRoot"></div>
+  <div class="toast" id="toast"></div>
+</div>
+
+<script type="module">
+import { mnemonicNew, mnemonicToWalletKey, mnemonicValidate } from "https://esm.sh/@ton/crypto@3.3.0";
+import { TonClient, WalletContractV4, internal, toNano, fromNano, Address, beginCell } from "https://esm.sh/@ton/ton@15.1.0";
+
+const APP_NAME="PisunWallet";
+const STORE_KEY="pisunwallet_v1";
+const RPC={mainnet:"https://toncenter.com/api/v2/jsonRPC",testnet:"https://testnet.toncenter.com/api/v2/jsonRPC"};
+const API={mainnet:"https://tonapi.io",testnet:"https://testnet.tonapi.io"};
+const EXPLORER={mainnet:"https://tonviewer.com/",testnet:"https://testnet.tonviewer.com/"};
+const DIAMOND='<svg viewBox="0 0 24 24" fill="none"><path d="M3 8l9 12 9-12-4-4H7L3 8z" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 8h18M8 4l4 16 4-16" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg>';
+const GRAM_SVG=`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><radialGradient id='gg' cx='35%' cy='28%' r='80%'><stop offset='0' stop-color='#e3d9ff'/><stop offset='52%' stop-color='#7c3aed'/><stop offset='100%' stop-color='#2c0960'/></radialGradient><linearGradient id='gs' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#ff8fd6'/><stop offset='1' stop-color='#8b5cf6'/></linearGradient></defs><circle cx='32' cy='32' r='30' fill='url(#gg)'/><circle cx='32' cy='32' r='30' fill='none' stroke='url(#gs)' stroke-width='2.5'/><path d='M41 25c-2.2-2.8-5.3-4.2-8.7-4.2-7 0-12.3 5.2-12.3 11.9 0 6.9 5.2 12.1 12.3 12.1 4.2 0 7.6-1.9 9.7-5.1v-7.9H30.5' fill='none' stroke='#fff' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round'/></svg>`;
+const GRAM_IMG="data:image/svg+xml;utf8,"+encodeURIComponent(GRAM_SVG);
+const FEATURED={mainnet:[{master:"EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs",decimals:6,symbol:"USD₮",name:"Tether USD",image:"https://assets.coingecko.com/coins/images/325/large/Tether.png"}],testnet:[]};
+const MARKETS=[
+  {ic:"fi-rr-gift",t:"Portals",s:"Маркет Telegram-подарков",url:"https://t.me/portals/market"},
+  {ic:"fi-rr-shopping-cart",t:"MRKT",s:"Маркетплейс подарков",url:"https://t.me/mrkt/app"},
+  {ic:"fi-rr-box",t:"Tonnel",s:"Gift marketplace",url:"https://t.me/tonnel_network_bot"},
+  {ic:"fi-rr-diamond",t:"GetGems",s:"NFT-маркет на TON",url:"https://getgems.io"},
+  {ic:"fi-rr-refresh",t:"STON.fi",s:"DEX / обмен токенов",url:"https://app.ston.fi"},
+  {ic:"fi-rr-coins",t:"DeDust",s:"DEX / обмен токенов",url:"https://dedust.io"},
+];
+const RANGES=[{k:"1d",t:"1Д",s:86400},{k:"7d",t:"7Д",s:604800},{k:"1m",t:"1М",s:2592000},{k:"1y",t:"1Г",s:31536000}];
+
+let S={mnemonic:null,key:null,wallet:null,client:null,address:null,raw:null,network:"mainnet",ton:0,tonUsd:0,jettons:[],events:[],pendingMnemonic:null,tab:"home",coinKey:null,coinId:"ton",coinRange:"7d"};
+let vanityStop=false;
+
+const $=(id)=>document.getElementById(id);
+const scr=()=>$("screen");
+const enc=new TextEncoder(),dec=new TextDecoder();
+function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("show"),2800);}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function b64(b){return btoa(String.fromCharCode(...new Uint8Array(b)));}
+function ub64(s){return Uint8Array.from(atob(s),c=>c.charCodeAt(0));}
+function shorten(a){return a.length>16?a.slice(0,8)+"…"+a.slice(-6):a;}
+function fmt(n,d=4){n=Number(n);if(!isFinite(n))return"0";return(n%1===0?n.toString():n.toFixed(d).replace(/0+$/,"").replace(/\.$/,""));}
+function fmtUsd(n){n=Number(n);if(!isFinite(n)||!n)return"—";const a=Math.abs(n);if(a>=1e9)return"$"+(n/1e9).toFixed(2)+"B";if(a>=1e6)return"$"+(n/1e6).toFixed(2)+"M";if(a>=1e3)return"$"+(n/1e3).toFixed(2)+"K";return"$"+n.toFixed(2);}
+function parseAny(s){return s.includes(":")?Address.parseRaw(s):Address.parse(s);}
+function sameAddr(a,b){try{return parseAny(a).toRawString()===parseAny(b).toRawString();}catch(_){return a===b;}}
+function toUnits(a,dc){const[i,f=""]=String(a).trim().split(".");return BigInt((i||"0")+(f+"0".repeat(dc)).slice(0,dc));}
+function fromUnits(raw,dc){raw=BigInt(raw);const b=BigInt(10)**BigInt(dc);const i=raw/b,f=raw%b;let fs=f.toString().padStart(dc,"0").replace(/0+$/,"");return fs?`${i}.${fs}`:i.toString();}
+const sleep=(ms)=>new Promise(r=>setTimeout(r,ms));
+
+async function deriveKey(pw,salt){const bk=await crypto.subtle.importKey("raw",enc.encode(pw),"PBKDF2",false,["deriveKey"]);return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:250000,hash:"SHA-256"},bk,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]);}
+async function encM(m,pw,net){const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),k=await deriveKey(pw,salt);const ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},k,enc.encode(JSON.stringify(m)));return{salt:b64(salt),iv:b64(iv),ct:b64(ct),network:net};}
+async function decM(r,pw){const k=await deriveKey(pw,ub64(r.salt));const pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:ub64(r.iv)},k,ub64(r.ct));return JSON.parse(dec.decode(pt));}
+
+async function buildWallet(mnemonic,net){
+  const key=await mnemonicToWalletKey(mnemonic);
+  const wallet=WalletContractV4.create({workchain:0,publicKey:key.publicKey});
+  const client=new TonClient({endpoint:RPC[net]});
+  Object.assign(S,{mnemonic,key,wallet,client,network:net,address:wallet.address.toString({bounceable:false,testOnly:net==="testnet"}),raw:wallet.address.toRawString().toLowerCase()});
+}
+async function api(path){const r=await fetch(API[S.network]+path,{headers:{Accept:"application/json"}});if(!r.ok)throw new Error("api "+r.status);return r.json();}
+async function loadPortfolio(){
+  try{const acc=await api(`/v2/accounts/${S.address}`);S.ton=Number(fromNano(BigInt(acc.balance||0)));}catch(e){S.ton=0;}
+  try{const j=await api(`/v2/accounts/${S.address}/jettons?currencies=usd`);
+    S.jettons=(j.balances||[]).map(b=>({symbol:b.jetton?.symbol||"?",name:b.jetton?.name||"",decimals:b.jetton?.decimals??9,image:b.jetton?.image,master:b.jetton?.address,wallet:b.wallet_address?.address,raw:b.balance,amount:fromUnits(b.balance||"0",b.jetton?.decimals??9),usd:b.price?.prices?.USD?Number(b.price.prices.USD)*Number(fromUnits(b.balance||"0",b.jetton?.decimals??9)):null})).filter(x=>Number(x.amount)>0);
+  }catch(e){S.jettons=[];}
+  for(const f of(FEATURED[S.network]||[])){if(!S.jettons.some(j=>sameAddr(j.master,f.master)))S.jettons.push({...f,raw:"0",amount:"0",usd:0,wallet:null});}
+  try{const r=await api(`/v2/rates?tokens=ton&currencies=usd`);S.tonUsd=r.rates?.TON?.prices?.USD||0;}catch(e){S.tonUsd=0;}
+}
+async function loadEvents(){try{const e=await api(`/v2/accounts/${S.address}/events?limit=25`);S.events=e.events||[];}catch(e){S.events=[];}}
+
+function jettonBody({amount,to,owner,comment}){let fwd=null;if(comment)fwd=beginCell().storeUint(0,32).storeStringTail(comment).endCell();let b=beginCell().storeUint(0x0f8a7ea5,32).storeUint(0n,64).storeCoins(amount).storeAddress(to).storeAddress(owner).storeBit(0).storeCoins(toNano("0.02"));b=fwd?b.storeBit(1).storeRef(fwd):b.storeBit(0);return b.endCell();}
+
+function buildSpark(points){
+  if(!points||points.length<2)return`<div class="empty">График недоступен</div>`;
+  const pts=points.slice().sort((a,b)=>a[0]-b[0]).map(p=>p[1]);
+  const min=Math.min(...pts),max=Math.max(...pts),rng=(max-min)||1,W=320,H=120,step=W/(pts.length-1);
+  const co=pts.map((v,i)=>[i*step,H-((v-min)/rng)*H]);
+  const line=co.map((c,i)=>(i?"L":"M")+c[0].toFixed(1)+" "+c[1].toFixed(1)).join(" ");
+  const area=line+` L ${W} ${H} L 0 ${H} Z`;
+  const up=pts[pts.length-1]>=pts[0],col=up?"#34d399":"#f87171";
+  return`<svg viewBox="0 0 ${W} ${H}" width="100%" height="120" preserveAspectRatio="none"><defs><linearGradient id="cg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="${col}" stop-opacity=".35"/><stop offset="1" stop-color="${col}" stop-opacity="0"/></linearGradient></defs><path d="${area}" fill="url(#cg)"/><path d="${line}" fill="none" stroke="${col}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+}
+
+/* ============ UI ============ */
+const UI={
+  render(html,tabs=false){scr().innerHTML=html;$("tabbar").classList.toggle("hidden",!tabs);},
+  brand(t){return`<div class="brand"><div class="mark">${DIAMOND}</div><span>${t}</span></div>`;},
+  tab(name){S.tab=name;document.querySelectorAll(".tabbar button").forEach(b=>b.classList.toggle("on",b.dataset.tab===name));({home:UI.home,history:UI.history,markets:UI.markets,nft:UI.nft,settings:UI.settings}[name]).call(UI);},
+
+  welcome(){this.render(`${this.brand(APP_NAME)}
+    <p class="center muted" style="margin:10px 0 18px">Некастодиальный кошелёк для сети TON</p>
+    <div class="card">
+      <button onclick="WALLET.startCreate()">Создать новый кошелёк</button>
+      <button class="ghost" style="margin-top:10px" onclick="UI.importV()">Импорт по seed-фразе</button>
+    </div>
+    <p class="center muted" style="font-size:12px">Ключи хранятся только в этом браузере, зашифрованные вашим паролем.</p>`);},
+
+  createOptionsV(){this.render(`${this.brand(APP_NAME)}
+    <div class="card">
+      <h3 style="font-size:17px">Новый кошелёк</h3>
+      <p class="muted" style="font-size:13px;margin:8px 0">Можно сгенерировать красивое окончание адреса (необязательно). Оставьте пустым для обычного.</p>
+      <label>Желаемые последние символы</label>
+      <input id="vanSuffix" maxlength="4" placeholder="напр. AA, 77, ton">
+      <div class="tags" style="margin:10px 0">${["AA","77","ton","ai","pp","99","xx"].map(s=>`<span class="tag" onclick="document.getElementById('vanSuffix').value='${s}'">${s}</span>`).join("")}</div>
+      <button id="genBtn" onclick="WALLET.generate()">Создать ��ошелёк</button>
+      <div id="genProg" class="center muted" style="margin-top:10px;font-size:13px"></div>
+      <button class="ghost" id="stopBtn" style="margin-top:10px;display:none" onclick="WALLET.stopGen()">Остановить поиск</button>
+    </div>
+    <p class="center muted" style="font-size:12px">1–2 символа — быстро. 3+ может искаться очень долго.</p>
+    <button class="ghost" style="margin-top:6px" onclick="UI.welcome()">Назад</button>`);},
+
+  createV(){this.render(`${this.brand("Seed-фраза")}
+    ${S.pendingAddr?`<p class="center eyebrow" style="display:flex;justify-content:center">Адрес заканчивается на «${esc(S.pendingAddr.slice(-4))}»</p>`:""}
+    <div class="warn" style="margin-top:12px">Запишите эти 24 слова по порядку. Кто знает их — получит доступ к средствам. Восстановить фразу нельзя.</div>
+    <div class="seed">${S.pendingMnemonic.map((w,i)=>`<div><span class="n">${i+1}.</span>${w}</div>`).join("")}</div>
+    <button class="ghost" onclick="navigator.clipboard.writeText('${S.pendingMnemonic.join(" ")}');toastMsg('Скопировано')">Скопировать фразу</button>
+    <button style="margin-top:10px" onclick="UI.passV()">Я записал(а), дальше</button>`);},
+
+  importV(){this.render(`${this.brand("Импорт")}
+    <label>24 слова через пробел</label><textarea id="impSeed" rows="4" placeholder="word1 word2 ..."></textarea>
+    <button id="impBtn" style="margin-top:12px" onclick="WALLET.doImport()">Продолжить</button>
+    <button class="ghost" style="margin-top:10px" onclick="UI.welcome()">Назад</button>`);},
+  passV(){this.render(`${this.brand("Пароль")}
+    <p class="center muted">Шифрует кошелёк в этом браузере.</p>
+    <label>Пароль (мин. 6)</label><input id="pw1" type="password">
+    <label>Повтор</label><input id="pw2" type="password">
+    <button id="pwBtn" style="margin-top:14px" onclick="WALLET.savePassword()">Создать кошелёк</button>`);},
+  unlockV(){this.render(`${this.brand(APP_NAME)}
+    <label>Пароль</label><input id="unPw" type="password" onkeydown="if(event.key==='Enter')WALLET.unlock()">
+    <button style="margin-top:14px" onclick="WALLET.unlock()">Разблокировать</button>
+    <p class="center" style="margin-top:16px"><span class="link" style="font-size:14px" onclick="WALLET.confirmReset()">Сбросить кошелёк</span></p>`);setTimeout(()=>$("unPw")?.focus(),80);},
+
+  home(){
+    const usd=S.ton*S.tonUsd;
+    const tonRow=`<div class="tok" onclick="WALLET.openCoin('TON')"><img src="${GRAM_IMG}"><div class="nm"><div class="t">Gram</div><div class="s">GRAM</div></div><div class="am">${fmt(S.ton)}<div class="u">${usd?"$"+fmt(usd,2):""}</div></div></div>`;
+    const jr=S.jettons.map((j,i)=>`<div class="tok" onclick="WALLET.openCoin('${i}')">${j.image?`<img src="${esc(j.image)}">`:`<div class="logo">${esc((j.symbol||"?")[0])}</div>`}<div class="nm"><div class="t">${esc(j.name||j.symbol)}</div><div class="s">${esc(j.symbol)}</div></div><div class="am">${fmt(j.amount)}<div class="u">${j.usd?"$"+fmt(j.usd,2):""}</div></div></div>`).join("");
+    this.render(`
+      <div class="head"><span class="pill ${S.network==='testnet'?'test':''}">${S.network}</span><button class="icbtn" onclick="WALLET.refresh()"><i class="fi fi-rr-refresh"></i></button></div>
+      <div class="balwrap"><div class="hero-glow"></div>
+        <div class="balance">${fmt(S.ton)} <small>GRAM</small></div>
+        <div class="balusd">${usd?"≈ $"+fmt(usd,2):""}</div>
+        <div class="addr" onclick="WALLET.copyAddr()">${shorten(S.address)} <i class="fi fi-rr-copy"></i></div>
+      </div>
+      <div class="actions">
+        <button onclick="WALLET.openReceive()"><span class="ic"><i class="fi fi-rr-arrow-small-down"></i></span>Получить</button>
+        <button onclick="WALLET.openSend('TON')"><span class="ic"><i class="fi fi-rr-paper-plane"></i></span>Отправить</button>
+        <button onclick="UI.tab('markets')"><span class="ic"><i class="fi fi-rr-apps"></i></span>Маркеты</button>
+      </div>
+      <div class="card"><div class="sect"><h3>Активы</h3></div>${tonRow}${jr}</div>`,true);
+  },
+  history(){
+    let rows="";
+    if(!S.events.length)rows=`<div class="empty">Пока нет операций</div>`;
+    for(const ev of S.events){for(const a of(ev.actions||[])){
+      const p=a.simple_preview||{};const tt=a.TonTransfer,jt=a.JettonTransfer;let inc=null;
+      if(tt)inc=(tt.recipient?.address||"").toLowerCase()===S.raw;else if(jt)inc=(jt.recipient?.address||"").toLowerCase()===S.raw;
+      const when=new Date((ev.timestamp||0)*1000).toLocaleString("ru-RU",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
+      const val=esc(p.value||"");const sign=inc===true?"+":inc===false?"−":"";
+      const ico=inc===true?"fi-rr-arrow-small-down":inc===false?"fi-rr-arrow-small-up":"fi-rr-bolt";
+      rows+=`<div class="tx"><div class="l"><div class="ico ${inc===true?'in':''}"><i class="fi ${ico}"></i></div><div class="d"><div class="t">${esc(p.name||a.type)}</div><div class="s">${esc(p.description||"")} · ${when}</div></div></div><div class="a ${inc===true?'in':''}">${val?sign+val:""}</div></div>`;
+    }}
+    this.render(`<div class="head"><h2 style="font-size:22px">История</h2><button class="icbtn" onclick="WALLET.refresh()"><i class="fi fi-rr-refresh"></i></button></div><div class="card">${rows}</div>`,true);
+  },
+  async nft(){
+    this.render(`<div class="head"><h2 style="font-size:22px">NFT</h2><button class="icbtn" onclick="WALLET.refresh()"><i class="fi fi-rr-refresh"></i></button></div><div class="card"><div class="empty">Загрузка…</div></div>`,true);
+    let items=[];
+    try{const d=await api(`/v2/accounts/${S.address}/nfts?limit=100&indirect_ownership=false`);items=d.nft_items||[];}catch(e){}
+    if(S.tab!=="nft")return;
+    let body;
+    if(!items.length){body=`<div class="card"><div class="empty">На кошелёк пока не приходили NFT</div></div>`;}
+    else{body=`<div class="nftgrid">`+items.map(n=>{const pv=n.previews||[];const img=(pv.find(p=>p.resolution==="500x500")||pv[pv.length-1]||{}).url||n.metadata?.image||"";const name=esc(n.metadata?.name||("NFT #"+(n.index||"")));const col=esc(n.collection?.name||"");const link=EXPLORER[S.network]+(n.address||"");return `<div class="nftc" onclick="window.open('${link}','_blank')"><div class="nfthumb">${img?`<img src="${esc(img)}" loading="lazy" onerror="this.style.display='none'">`:""}<div class="nfph"><i class="fi fi-rr-gem"></i></div></div><div class="nftm"><div class="t">${name}</div>${col?`<div class="s">${col}</div>`:""}</div></div>`;}).join("")+`</div>`;}
+    if(S.tab!=="nft")return;
+    this.render(`<div class="head"><h2 style="font-size:22px">NFT</h2><button class="icbtn" onclick="WALLET.refresh()"><i class="fi fi-rr-refresh"></i></button></div>${body}`,true);
+  },
+  markets(){
+    const list=MARKETS.map(m=>`<div class="mkt" onclick="window.open('${m.url}','_blank')"><div class="em"><i class="fi ${m.ic}"></i></div><div class="nm"><div class="t">${m.t}</div><div class="s">${m.s}</div></div><div class="go"><i class="fi fi-rr-angle-small-right"></i></div></div>`).join("");
+    this.render(`<div class="head"><h2 style="font-size:22px">Маркеты</h2></div>
+      <div class="tags"><span class="tag">Подарки</span><span class="tag">NFT</span><span class="tag">DEX</span><span class="tag">TON Connect</span></div>
+      ${list}
+      <div class="card"><div class="sect"><h3>Подключение (TON Connect)</h3></div>
+        <p class="muted" style="font-size:13px;margin:8px 0 10px">Вставьте ссылку TON Connect из маркета, чтобы разобрать запрос.</p>
+        <input id="tcLink" placeholder="tc://connect?...">
+        <button style="margin-top:10px" onclick="WALLET.parseTC()">Разобрать запрос</button>
+      </div>`,true);
+  },
+  settings(){this.render(`<div class="head"><h2 style="font-size:22px">Настройки</h2></div>
+    <div class="card"><label>Сеть</label>
+      <div class="row"><button class="${S.network==='mainnet'?'':'ghost'}" onclick="WALLET.switchNet('mainnet')">Mainnet</button><button class="${S.network==='testnet'?'':'ghost'}" onclick="WALLET.switchNet('testnet')">Testnet</button></div>
+      <button class="ghost" style="margin-top:14px" onclick="WALLET.openExplorer()">Открыть в Tonviewer</button>
+      <button class="ghost" style="margin-top:10px" onclick="WALLET.revealSeed()">Показать seed-фразу</button>
+      <button class="danger" style="margin-top:10px" onclick="WALLET.confirmReset()">Удалить кошелёк</button>
+    </div>
+    <p class="center muted" style="font-size:12px;word-break:break-all">${esc(S.address)}</p>
+    <p class="center muted" style="font-size:11px;margin-top:6px">${APP_NAME}</p>`,true);},
+};
+window.UI=UI;
+window.toastMsg=toast;
+
+function sheet(html){$("modalRoot").innerHTML=`<div class="modal" onclick="if(event.target===this)WALLET.closeModal()"><div class="sheet">${html}</div></div>`;}
+function renderQR(text){const box=$("qr");if(!box)return;box.innerHTML="";const img=document.createElement("img");img.width=220;img.height=220;img.src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="+encodeURIComponent("ton://transfer/"+text);img.onerror=()=>box.innerHTML='<p style="color:#333">QR недоступен</p>';box.appendChild(img);}
+
+async function genVanity(suffix){let tries=0;const max=60000;while(!vanityStop&&tries<max){tries++;const m=await mnemonicNew();const key=await mnemonicToWalletKey(m);const w=WalletContractV4.create({workchain:0,publicKey:key.publicKey});const addr=w.address.toString({bounceable:false,testOnly:S.network==="testnet"});if(addr.toLowerCase().endsWith(suffix))return{m,addr,tries};if(tries%3===0){const p=$("genProg");if(p)p.textContent="Попыток: "+tries;await sleep(0);}}return null;}
+
+const WALLET={
+  startCreate(){UI.createOptionsV();},
+  async generate(){
+    const suf=$("vanSuffix").value.trim();const btn=$("genBtn");
+    if(!suf){btn.disabled=true;btn.innerHTML='<span class="spin"></span>';S.pendingAddr=null;S.pendingMnemonic=await mnemonicNew();UI.createV();return;}
+    if(!/^[A-Za-z0-9_-]{1,4}$/.test(suf)){toast("Допустимы: A-Z a-z 0-9 _ -");return;}
+    if(suf.length>2)toast("Длинное окончание может искаться долго");
+    vanityStop=false;btn.disabled=true;$("stopBtn").style.display="block";$("genProg").textContent="Поиск…";
+    const res=await genVanity(suf.toLowerCase());
+    btn.disabled=false;if($("stopBtn"))$("stopBtn").style.display="none";
+    if(res){S.pendingMnemonic=res.m;S.pendingAddr=res.addr;toast("Найдено за "+res.tries+" попыток");UI.createV();}
+    else if(!vanityStop){toast("Не найдено — попробуйте короче");if($("genProg"))$("genProg").textContent="";}
+    else if($("genProg")){$("genProg").textContent="";}
+  },
+  stopGen(){vanityStop=true;},
+  async doImport(){const w=$("impSeed").value.trim().toLowerCase().split(/\s+/);if(w.length!==24){toast("Нужно 24 слова");return;}const b=$("impBtn");b.disabled=true;b.innerHTML='<span class="spin"></span>';const ok=await mnemonicValidate(w);b.disabled=false;b.textContent="Продолжить";if(!ok){toast("Неверная фраза");return;}S.pendingMnemonic=w;S.pendingAddr=null;UI.passV();},
+  async savePassword(){const p1=$("pw1").value,p2=$("pw2").value;if(p1.length<6){toast("Мин. 6 символов");return;}if(p1!==p2){toast("Пароли не совпадают");return;}const b=$("pwBtn");b.disabled=true;b.innerHTML='<span class="spin"></span>';try{const net=S.network;const rec=await encM(S.pendingMnemonic,p1,net);localStorage.setItem(STORE_KEY,JSON.stringify(rec));await buildWallet(S.pendingMnemonic,net);S.pendingMnemonic=null;S.pendingAddr=null;await enterMain();}catch(e){toast("Ошибка: "+e.message);b.disabled=false;b.textContent="Создать кошелёк";}},
+  async unlock(){const rec=JSON.parse(localStorage.getItem(STORE_KEY));try{const m=await decM(rec,$("unPw").value);await buildWallet(m,rec.network||"mainnet");await enterMain();}catch(e){toast("Неверный пароль");}},
+  confirmReset(){if(confirm("Удалить кошелёк? Без seed-фразы восстановление невозможно.")){localStorage.removeItem(STORE_KEY);location.reload();}},
+  copyAddr(){navigator.clipboard.writeText(S.address);toast("Адрес скопирован");},
+  async refresh(){toast("Обновление…");await loadPortfolio();await loadEvents();UI.tab(S.tab);},
+  openExplorer(){window.open(EXPLORER[S.network]+S.address,"_blank");},
+  async switchNet(net){if(net===S.network)return;const rec=JSON.parse(localStorage.getItem(STORE_KEY));rec.network=net;localStorage.setItem(STORE_KEY,JSON.stringify(rec));await buildWallet(S.mnemonic,net);await enterMain();toast("Сеть: "+net);},
+  revealSeed(){if(!confirm("Показать seed-фразу?"))return;sheet(`<div class="topbar"><h3>Seed-фраза</h3><span class="link" onclick="WALLET.closeModal()"><i class="fi fi-rr-cross-small"></i></span></div><div class="warn">Никому не показывайте.</div><div class="seed">${S.mnemonic.map((w,i)=>`<div><span class="n">${i+1}.</span>${w}</div>`).join("")}</div><button onclick="navigator.clipboard.writeText('${S.mnemonic.join(" ")}');toastMsg('Скопировано')">Скопировать</button>`);},
+  closeModal(){$("modalRoot").innerHTML="";},
+
+  openReceive(){sheet(`<div class="topbar"><h3>Получить</h3><span class="link" onclick="WALLET.closeModal()"><i class="fi fi-rr-cross-small"></i></span></div><p class="center muted" style="font-size:13px">Отсканируйте QR или скопируйте адрес</p><div id="qr"></div><p class="center" style="word-break:break-all;font-size:13px">${esc(S.address)}</p><button style="margin-top:12px" onclick="WALLET.copyAddr()">Скопировать адрес</button>`);renderQR(S.address);},
+
+  openCoin(key){
+    const isTon=key==="TON";const j=isTon?null:S.jettons[Number(key)];
+    const name=isTon?"Gram":(j.name||j.symbol);const sym=isTon?"GRAM":j.symbol;
+    const bal=isTon?fmt(S.ton):fmt(j.amount);
+    const logo=isTon?`<img class="clogo" src="${GRAM_IMG}">`:(j.image?`<img class="clogo" src="${esc(j.image)}">`:`<div class="clogo">${esc(sym[0])}</div>`);
+    const sendArg=isTon?"TON":j.master;
+    sheet(`<div class="topbar"><h3>Монета</h3><span class="link" onclick="WALLET.closeModal()"><i class="fi fi-rr-cross-small"></i></span></div>
+      <div class="chead">${logo}<div><div style="font-weight:600">${esc(name)}</div><div class="muted" style="font-size:13px">${esc(bal)} ${esc(sym)}</div></div></div>
+      <div id="coinBody"><div class="empty"><span class="spin"></span></div></div>
+      <div class="row" style="margin-top:14px"><button onclick="WALLET.openSend('${esc(sendArg)}')">Отправить</button><button class="ghost" onclick="WALLET.openReceive()">Получить</button></div>`);
+    this.fillCoin(key);
+  },
+  async fillCoin(key){
+    const isTon=key==="TON";const j=isTon?null:S.jettons[Number(key)];const id=isTon?"ton":j.master;
+    S.coinKey=key;S.coinId=id;S.coinRange=S.coinRange||"7d";
+    let price=0,diff="",cap=null;
+    try{const r=await api(`/v2/rates?tokens=${encodeURIComponent(id)}&currencies=usd`);const k=Object.keys(r.rates||{})[0];const info=(r.rates||{})[k]||{};price=info.prices?.USD||0;diff=info.diff_24h?.USD||"";}catch(e){}
+    try{if(isTon){const cg=await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=the-open-network").then(r=>r.json());cap=cg?.[0]?.market_cap||null;}else{const jd=await api(`/v2/jettons/${encodeURIComponent(j.master)}`);const dc=jd.metadata?.decimals?Number(jd.metadata.decimals):j.decimals;cap=Number(fromUnits(jd.total_supply||"0",dc))*price;}}catch(e){}
+    const el=$("coinBody");if(!el)return;
+    const dn=parseFloat(String(diff).replace(/[^0-9.\-]/g,""));const dcls=isNaN(dn)?"":dn>=0?"pos":"neg";
+    const dp=price<1?6:2;
+    el.innerHTML=`<div class="cprice">$${fmt(price,dp)}</div><div class="cdiff ${dcls}">${esc(diff||"—")} · 24ч</div>
+      <div class="ranges">${RANGES.map(r=>`<button class="rbtn${r.k===S.coinRange?' on':''}" data-r="${r.k}" onclick="WALLET.setRange('${r.k}')">${r.t}</button>`).join("")}</div>
+      <div class="chart" id="coinChart"><div class="empty"><span class="spin"></span></div></div>
+      <div class="crow"><span class="muted">Рыночная капитализация</span><b>${fmtUsd(cap)}</b></div>
+      <div class="crow"><span class="muted">Цена</span><b>$${fmt(price,dp)}</b></div>
+      <div class="crow"><span class="muted">Изменение 24ч</span><b style="color:${dcls==='neg'?'var(--err)':dcls==='pos'?'var(--ok)':'inherit'}">${esc(diff||"—")}</b></div>`;
+    this.loadChart();
+  },
+  setRange(k){S.coinRange=k;document.querySelectorAll('.rbtn').forEach(b=>b.classList.toggle('on',b.dataset.r===k));this.loadChart();},
+  async loadChart(){
+    const c=$("coinChart");if(!c)return;c.innerHTML='<div class="empty"><span class="spin"></span></div>';
+    const rng=RANGES.find(r=>r.k===S.coinRange)||RANGES[1];const end=Math.floor(Date.now()/1000);const start=end-rng.s;
+    try{const d=await api(`/v2/rates/chart?token=${encodeURIComponent(S.coinId)}&currency=usd&start_date=${start}&end_date=${end}&points_count=80`);const pts=d.points||[];const c2=$("coinChart");if(c2)c2.innerHTML=buildSpark(pts);}catch(e){const c2=$("coinChart");if(c2)c2.innerHTML='<div class="empty">График недоступен</div>';}
+  },
+
+  openSend(preselect){
+    const sendable=S.jettons.filter(j=>Number(j.amount)>0&&j.wallet);
+    const opts=[`<option value="TON">GRAM — ${fmt(S.ton)}</option>`].concat(sendable.map(j=>`<option value="${esc(j.master)}">${esc(j.symbol)} — ${fmt(j.amount)}</option>`)).join("");
+    sheet(`<div class="topbar"><h3>Отправить</h3><span class="link" onclick="WALLET.closeModal()"><i class="fi fi-rr-cross-small"></i></span></div>
+      <label>Актив</label><select id="sAsset">${opts}</select>
+      <label>Адрес получателя</label><input id="sTo" placeholder="EQ... / UQ...">
+      <label>Сумма</label><input id="sAmt" type="number" step="any" placeholder="0.0">
+      <label>Комментарий (необяз.)</label><input id="sCom">
+      <button id="sBtn" style="margin-top:14px" onclick="WALLET.doSend()">Отправить</button>
+      <p class="muted" style="font-size:12px;margin-top:10px;text-align:center">Комиссия сети: ~0.005 TON · токены ~0.05 TON</p>`);
+    if(preselect&&preselect!=="TON"){const o=$("sAsset");if([...o.options].some(x=>x.value===preselect))o.value=preselect;}
+  },
+  async doSend(){
+    const asset=$("sAsset").value,to=$("sTo").value.trim(),amt=$("sAmt").value.trim(),com=$("sCom").value;
+    if(!to){toast("Введите адрес");return;}if(!amt||Number(amt)<=0){toast("Введите сумму");return;}
+    let dest;try{dest=parseAny(to);}catch(e){toast("Неверный адрес");return;}
+    const btn=$("sBtn");btn.disabled=true;btn.innerHTML='<span class="spin"></span>';
+    try{
+      const contract=S.client.open(S.wallet);
+      const seqno=await contract.getSeqno();
+      if(asset==="TON"){
+        await contract.sendTransfer({secretKey:S.key.secretKey,seqno,messages:[internal({to:dest,value:toNano(amt),body:com||undefined,bounce:false})]});
+      }else{
+        const j=S.jettons.find(x=>x.master===asset);
+        if(!j||!j.wallet){toast("Нельзя отправить этот токен");btn.disabled=false;btn.textContent="Отправить";return;}
+        const units=toUnits(amt,j.decimals);
+        if(units>BigInt(j.raw||"0")){toast("Недостаточно средств");btn.disabled=false;btn.textContent="Отправить";return;}
+        const body=jettonBody({amount:units,to:dest,owner:parseAny(S.address),comment:com});
+        await contract.sendTransfer({secretKey:S.key.secretKey,seqno,messages:[internal({to:parseAny(j.wallet),value:toNano("0.05"),body,bounce:true})]});
+      }
+      this.closeModal();toast("Отправлено! Баланс обновится через ~15 сек");
+      setTimeout(()=>this.refresh(),15000);
+    }catch(e){toast("Ошибка: "+(e.message||e));btn.disabled=false;btn.textContent="Отправить";}
+  },
+  parseTC(){
+    const link=$("tcLink").value.trim();
+    if(!link){toast("Вставьте ссылку");return;}
+    try{
+      const q=link.includes("?")?new URLSearchParams(link.split("?")[1]):new URLSearchParams();
+      const v=q.get("v"),id=q.get("id"),r=q.get("r");
+      let app="";try{if(r){const o=JSON.parse(decodeURIComponent(r));app=o.manifestUrl||"";}}catch(_){}
+      sheet(`<div class="topbar"><h3>Запрос подключения</h3><span class="link" onclick="WALLET.closeModal()"><i class="fi fi-rr-cross-small"></i></span></div>
+        <div class="warn">Разбор ссылки TON Connect. Подтверждайте подключение только для доверенных сервисов.</div>
+        <div class="crow"><span class="muted">Версия</span><b>${esc(v||"\u2014")}</b></div>
+        <div class="crow"><span class="muted">ID сессии</span><b>${esc(id?shorten(id):"\u2014")}</b></div>
+        <div class="crow"><span class="muted">Манифест</span><b style="word-break:break-all">${esc(app||"\u2014")}</b></div>
+        <div class="crow"><span class="muted">Ваш адрес</span><b>${esc(shorten(S.address))}</b></div>
+        <button style="margin-top:12px" onclick="WALLET.copyAddr()">Скопировать адрес для входа</button>`);
+    }catch(e){toast("Не удалось разобрать ссылку");}
+  },
+};
+window.WALLET=WALLET;
+
+async function enterMain(){
+  UI.home();
+  $("tabbar").classList.remove("hidden");
+  await loadPortfolio();await loadEvents();
+  UI.tab("home");
+}
+
+(function boot(){
+  const sc=$("stars");if(sc){let h="";for(let i=0;i<46;i++){h+=`<span class="star" style="left:${(Math.random()*100).toFixed(2)}%;top:${(Math.random()*100).toFixed(2)}%;animation-delay:${(Math.random()*4).toFixed(1)}s"></span>`;}sc.innerHTML=h;}
+  if(localStorage.getItem(STORE_KEY))UI.unlockV();else UI.welcome();
+})();
+</script>
+</body>
+</html>
