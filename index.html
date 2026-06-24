@@ -6,7 +6,7 @@
 <title>PW WALLET</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css">
 <style>
@@ -33,7 +33,7 @@ body{font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;b
 .grain{position:absolute;inset:0;opacity:.05;background-image:radial-gradient(rgba(255,255,255,.6) 1px,transparent 1px);background-size:3px 3px;pointer-events:none;}
 #app{position:relative;z-index:2;width:100%;max-width:480px;min-height:100vh;display:flex;flex-direction:column;background:rgba(7,9,8,.55);border-left:1px solid var(--line);border-right:1px solid var(--line);}
 .screen{flex:1;overflow-y:auto;padding:18px 16px 98px;}
-h1,h2,h3{font-family:'Sora',system-ui,sans-serif;letter-spacing:-.3px;font-weight:700;}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;letter-spacing:-.3px;font-weight:700;}
 .muted{color:var(--muted);}
 .center{text-align:center;}
 i.fi{display:inline-flex;line-height:0;}
@@ -53,7 +53,7 @@ label{display:block;margin:12px 0 6px;font-size:13px;color:var(--muted);}
 .brand{display:flex;align-items:center;gap:12px;justify-content:center;margin:30px 0 8px;}
 .brand .mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(160deg,#1a2018,#0c100e);border:1px solid var(--lime-line);display:grid;place-items:center;}
 .brand .mark svg{width:20px;height:20px;}
-.brand span{font-family:'Sora',system-ui,sans-serif;font-size:20px;font-weight:700;letter-spacing:-.2px;}
+.brand span{font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:700;letter-spacing:-.2px;}
 .eyebrow{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:999px;border:1px solid var(--line);background:var(--panel);font-size:12px;font-weight:600;color:var(--muted);}
 .head{display:flex;align-items:center;justify-content:space-between;padding:2px;animation:rise .45s ease both;}
 .pill{font-size:12px;font-weight:600;padding:8px 13px;border-radius:999px;background:var(--panel);border:1px solid var(--line);color:var(--muted);text-transform:capitalize;}
@@ -63,8 +63,8 @@ label{display:block;margin:12px 0 6px;font-size:13px;color:var(--muted);}
 .balwrap{position:relative;text-align:center;padding:34px 0 14px;animation:rise .5s ease both;}
 .hero-glow{position:absolute;left:50%;top:30%;transform:translateX(-50%);width:360px;height:170px;background:radial-gradient(ellipse at center,rgba(198,245,58,.10),transparent 70%);filter:blur(22px);z-index:-1;}
 @keyframes pulse{0%,100%{opacity:.6;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.08)}}
-.balance{font-family:'Sora',system-ui,sans-serif;font-size:46px;font-weight:800;line-height:1;letter-spacing:-.5px;color:#fff;font-variant-numeric:tabular-nums;}
-.balance small{font-family:'Sora',system-ui,sans-serif;font-size:18px;font-weight:600;color:var(--muted);}
+.balance{font-family:'Playfair Display',Georgia,serif;font-size:46px;font-weight:800;line-height:1;letter-spacing:-.5px;color:#fff;font-variant-numeric:tabular-nums;}
+.balance small{font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:600;color:var(--muted);}
 .balusd{color:var(--muted);font-size:15px;margin-top:8px;}
 .addr{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--muted);cursor:pointer;padding:8px 13px;border-radius:999px;border:1px solid var(--line);background:var(--panel);}
 .addr:hover{border-color:var(--lime-line);color:var(--lime);}
@@ -136,7 +136,7 @@ label{display:block;margin:12px 0 6px;font-size:13px;color:var(--muted);}
 .chead{display:flex;align-items:center;gap:13px;margin-bottom:6px;}
 .clogo{width:50px;height:50px;border-radius:50%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:1px solid var(--line);font-weight:600;}
 .clogo.ton{background:linear-gradient(160deg,#1a2018,#0c100e);border:1px solid var(--lime-line);} .clogo.ton svg{width:26px;height:26px;}
-.cprice{font-family:'Sora',system-ui,sans-serif;font-size:34px;font-weight:800;letter-spacing:-.5px;margin-top:6px;font-variant-numeric:tabular-nums;}
+.cprice{font-family:'Playfair Display',Georgia,serif;font-size:34px;font-weight:800;letter-spacing:-.5px;margin-top:6px;font-variant-numeric:tabular-nums;}
 .cdiff{font-size:14px;font-weight:600;margin-top:2px;color:var(--muted);}
 .cdiff.pos{color:var(--ok);} .cdiff.neg{color:var(--err);}
 .chart{margin:16px 0 6px;}
@@ -150,7 +150,7 @@ label{display:block;margin:12px 0 6px;font-size:13px;color:var(--muted);}
 .promo .pglow{position:absolute;inset:0;background:radial-gradient(220px 130px at 85% 15%,rgba(255,255,255,.4),transparent 70%);pointer-events:none;}
 .promo .pinfo{flex:1;position:relative;z-index:1;}
 .promo .ptag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.02em;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.25);backdrop-filter:blur(6px);margin-bottom:9px;}
-.promo .ptitle{font-family:'Sora';font-weight:800;font-size:21px;line-height:1.08;}
+.promo .ptitle{font-family:'Playfair Display',Georgia,serif;font-weight:800;font-size:21px;line-height:1.08;}
 .promo .psub{font-size:12.5px;opacity:.92;margin-top:4px;}
 .promo .pico{position:relative;z-index:1;width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:25px;background:rgba(255,255,255,.22);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.3);}
 /* v4: liquid glass + water ripple */
@@ -357,6 +357,15 @@ const UI={
     const list=MARKETS.map(m=>`<div class="mkt" onclick="window.open('${m.url}','_blank')"><div class="em"><i class="fi ${m.ic}"></i></div><div class="nm"><div class="t">${m.t}</div><div class="s">${m.s}</div></div><div class="go"><i class="fi fi-rr-angle-small-right"></i></div></div>`).join("");
     this.render(`<div class="head"><h2 style="font-size:22px">Маркеты</h2></div>
       <div class="tags"><span class="tag">Подарки</span><span class="tag">NFT</span><span class="tag">DEX</span><span class="tag">TON Connect</span></div>
+      <div class="promo" style="background:linear-gradient(120deg,#229ED9,#2AABEE 55%,#34c0f5)" onclick="window.open('https://t.me/PisunWallet','_blank')">
+        <div class="pglow"></div>
+        <div class="pinfo">
+          <span class="ptag">Канал кошелька</span>
+          <div class="ptitle">PW WALLET</div>
+          <div class="psub">Новости, апдейты и гайды — t.me/PisunWallet</div>
+        </div>
+        <div class="pico"><i class="fi fi-rr-paper-plane"></i></div>
+      </div>
       ${list}
       <div class="card"><div class="sect"><h3>Подключение (TON Connect)</h3></div>
         <p class="muted" style="font-size:13px;margin:8px 0 10px">Вставьте ссылку TON Connect из маркета, чтобы разобрать запрос.</p>
